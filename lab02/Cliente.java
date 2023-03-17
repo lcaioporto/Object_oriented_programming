@@ -76,7 +76,7 @@ public class Cliente {
         int verificador1, verificador2, rest;
 
         if (stringLength != 11) {
-            return false; //verifica se o tamanho da string é igual a 11.
+            return false; //verifica se o tamanho da string é igual a 11. Se não for, retorna falso.
         }
 
         //verificar se todas os caracteres são iguais
