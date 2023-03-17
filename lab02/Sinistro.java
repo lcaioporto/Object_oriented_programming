@@ -13,12 +13,14 @@ public class Sinistro {
         return randomId;
     }
 
+    //Construtor
     public Sinistro (String data, String endereco) {
         this.id = generateRandomId();
         this.data = data;
         this.endereco = endereco;
     }
 
+    //Getters and setters
     public int getId () {
         return id;
     }

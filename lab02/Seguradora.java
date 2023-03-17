@@ -13,6 +13,7 @@ public class Seguradora {
         this.endereco = endereco;
     }
 
+    //Getters and setters
     public String getNome() {
         return nome;
     }

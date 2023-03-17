@@ -7,6 +7,7 @@ public class Cliente {
     private int idade;
     private String endereco;
 
+    //Construtor
     public Cliente (String nome, String cpf, String dataNascimento, int idade, String endereco) {
         this.nome = nome;
         this.cpf = cpf;
@@ -15,6 +16,7 @@ public class Cliente {
         this.endereco = endereco;
     }
 
+    //Getters and setters
     public String getNome() {
         return nome;
     }
