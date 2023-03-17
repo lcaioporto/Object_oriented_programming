@@ -1,3 +1,4 @@
+//TESTANDO E APRENDENDO O BÁSICO DE JAVA
 class Funcionario {
     private String nome;
     public Funcionario (String umNome) {
