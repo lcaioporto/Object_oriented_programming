@@ -1,7 +1,6 @@
 package lab02;
 
 public class Cliente {
-    //FALTA FUNCAO VALIDAR CPF e TOSTRING
     private String nome;
     private String cpf;
     private String dataNascimento;
