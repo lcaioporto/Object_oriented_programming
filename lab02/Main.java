@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Cliente cliente = new Cliente("Caio", "111.444.777-35", "30/11/2004", 19, "Casa");
         System.out.println(cliente.validarCPF()); //true
-        System.out.println(cliente.toString());
+        System.out.println(cliente.toString()); //imprime informações do cliente
 
         Seguradora seguradora = new Seguradora("nomeSeguradora", "(19)99345-1097", "seguradora@gmail.com", "Unicamp");
         System.out.println(seguradora.getNome()); //nomeSeguradora
