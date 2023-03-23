@@ -1,5 +1,3 @@
-package lab02;
-
 public class Main {
     public static void main(String[] args) {
         Cliente cliente = new Cliente("Caio", "111.444.777-35", "30/11/2004", 19, "Casa");
