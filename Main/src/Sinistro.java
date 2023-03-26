@@ -7,9 +7,9 @@ public class Sinistro {
     private String endereco;
 
     public int generateRandomId () {
-        //função que gera e retorna um id aleatório entre 0 e 99999.
+        //função que gera e retorna um id aleatório entre 0 e 999999.
         Random rand = new Random();
-        int randomId = rand.nextInt(99999); //gera um número inteiro aleatório entre 0 e 99999.
+        int randomId = rand.nextInt(999999); //gera um número inteiro aleatório entre 0 e 999999.
         return randomId;
     }
 

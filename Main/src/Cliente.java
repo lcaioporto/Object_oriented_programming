@@ -62,20 +62,17 @@ public class Cliente {
     }
 
     public boolean validarCPF () {
-
         String auxCpf = cpf.replaceAll("[^0-9]", ""); //retira caracteres que não são dígitos
-        int stringLength = auxCpf.length();
-        boolean allEqual = true;
         String digVerificadores = "", strVerificador1 = "", strVerificador2 = "";
+        boolean allEqual = true; //auxiliar para verificar se todos os dígitos do CPF são iguais
         char charCurrDigit;
+        int stringLength = auxCpf.length();
         int currDigit; //dígito atual - usado para iterar o cpf
         int multiplicador1 = 10, multiplicador2 = 11; //multiplicadores - usado para encontrar os digitos verificadores
         int sum1 = 0, sum2 = 0; //soma da multiplicação do dígito atual pelo multiplicador, para calcular os digitos verificadores
-        int verificador1, verificador2, rest;
+        int verificador1, verificador2, rest; //dígitos verificadores; "rest" é um auxiliar usado para guardar o resto de uma divisão
 
-        if (stringLength != 11) {
-            return false; //verifica se o tamanho da string é igual a 11. Se não for, retorna falso.
-        }
+        if (stringLength != 11) return false; //verifica se o tamanho da string é igual a 11. Se não for, retorna falso.
 
         //verificar se todas os caracteres são iguais
         for (int i = 0; i < stringLength - 1; i++) {
@@ -86,9 +83,8 @@ public class Cliente {
                 break; //caso em que os caracteres não são todos iguais
             }
         }
-        if (allEqual) {
-            return false; //caso em que todos os caracteres são iguais
-        }
+
+        if (allEqual) return false; //caso em que todos os caracteres são iguais
 
         //verificação do CPF por dígitos de validação
         for (int i = 0; i < stringLength; i++) {
