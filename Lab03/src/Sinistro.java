@@ -2,7 +2,7 @@
 import java.util.Random;
 
 public class Sinistro {
-    private int id;
+    private final int ID; //garantir que o ID é único
     private String data;
     private String endereco;
 
@@ -15,18 +15,14 @@ public class Sinistro {
 
     //Construtor
     public Sinistro (String data, String endereco) {
-        this.id = generateRandomId();
+        this.ID = generateRandomId();
         this.data = data;
         this.endereco = endereco;
     }
 
     //Getters and setters
     public int getId () {
-        return id;
-    }
-
-    public void setId (int newId) {
-        id = newId;
+        return ID;
     }
 
     public String getData () {

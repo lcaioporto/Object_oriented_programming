@@ -1,17 +1,23 @@
+import java.util.Date;
+import java.util.ArrayList;
 public class Cliente {
     private String nome;
-    private String cpf;
-    private String dataNascimento;
-    private int idade;
     private String endereco;
+    private final Date dataLicenca;
+    private String educacao;
+    private String genero;
+    private String classeEconomica;
+    private ArrayList<Veiculo> listaVeiculos;
 
     //Construtor
-    public Cliente (String nome, String cpf, String dataNascimento, int idade, String endereco) {
+    public Cliente (String nome, String endereco, String educacao, String genero, String classeEconomica) {
         this.nome = nome;
-        this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
-        this.idade = idade;
         this.endereco = endereco;
+        dataLicenca = new Date();
+        this.educacao = educacao;
+        this.genero = genero;
+        this.classeEconomica = classeEconomica;
+        listaVeiculos = new ArrayList<Veiculo>();
     }
 
     //Getters and setters
@@ -23,30 +29,6 @@ public class Cliente {
         nome = newName;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf (String newCpf) {
-        cpf = newCpf;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento (String newDataNascimento) {
-        dataNascimento = newDataNascimento;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade (int newIdade) {
-        idade = newIdade;
-    }
-
     public String getEndereco() {
         return endereco;
     }
@@ -55,12 +37,50 @@ public class Cliente {
         endereco = newEndereco;
     }
 
+    public Date getDataLicenca() {
+        return dataLicenca;
+    }
+
+    public void setEducacao(String newEducacao) {
+        educacao = newEducacao;
+    }
+
+    public String getEducacao() {
+        return educacao;
+    }
+
+    public void setGenero(String newGenero) {
+        genero = newGenero;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setClasseEconomica(String newClasseEconomica) {
+        genero = newClasseEconomica;
+    }
+
+    public String getClasseEconomica() {
+        return classeEconomica;
+    }
+
+
     @Override
     public String toString () {
-        String s = "-----CLIENTE-----" + "\nNome: " + nome + "\nIdade: " + idade + "\nCPF: " + cpf + "\nData de Nascimento: " + dataNascimento + "\nEndereco: " + endereco + "\n-----------------";
+        String s = "-----CLIENTE-----" + "\nNome: " + nome + "\nEndereco: " + endereco + "\nData de Licença: " + dataLicenca + "\nEducação: " + educacao + "\nGênero: " + genero + "\nClasse Econômica: " + classeEconomica + "\nLista de Veículos: " + listaVeiculos + "\n-----------------";
         return s;
     }
 
+    public void addVeiculo(Veiculo v) {
+        listaVeiculos.add(v);
+    }
+
+    public ArrayList<Veiculo> getListaVeiculos() {
+        return listaVeiculos;
+    }
+
+    /*
     public boolean validarCPF () {
         String auxCpf = cpf.replaceAll("[^0-9]", ""); //retira caracteres que não são dígitos
         String digVerificadores = "", strVerificador1 = "", strVerificador2 = "";
@@ -118,4 +138,5 @@ public class Cliente {
         if (digVerificadores.equals(strVerificador1 + strVerificador2)) return true;
         return false;
     }
+    */
 }
