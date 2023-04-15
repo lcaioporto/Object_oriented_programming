@@ -3,8 +3,8 @@ public class ClientePJ extends Cliente {
     private final String CNPJ;
     private Date dataFundacao;
 
-    public ClientePJ(String nome, String endereco, String educacao, String genero, String classeEconomica, String CNPJ, Date dataFundacao) {
-        super(nome, endereco, educacao, genero, classeEconomica);
+    public ClientePJ(String nome, String endereco, String CNPJ, Date dataFundacao) {
+        super(nome, endereco);
         this.CNPJ = CNPJ;
         this.dataFundacao = dataFundacao;
     }
@@ -23,8 +23,7 @@ public class ClientePJ extends Cliente {
 
     @Override
     public String toString () {
-        String s = "-----CLIENTE-----" + "\nNome: " + super.getNome() + "\nEndereco: " + super.getEndereco() + "\nData de Licença: " + super.getDataLicenca() + "\nEducação: " + super.getEducacao() + "\nGênero: " + super.getGenero() + "\nClasse Econômica: " + super.getClasseEconomica() + "\nLista de Veículos: " + super.getListaVeiculos() + "\nCNPJ: " + CNPJ + "\nData de Fundação: " + dataFundacao + "\n-----------------";
-        return s;
+        return "-----CLIENTE-----" + "\nNome: " + super.getNome() + "\nEndereco: " + super.getEndereco() +  "\nLista de Veículos: " + super.getListaVeiculos() + "\nCNPJ: " + CNPJ + "\nData de Fundação: " + dataFundacao + "\n-----------------";
     }
 
     /*

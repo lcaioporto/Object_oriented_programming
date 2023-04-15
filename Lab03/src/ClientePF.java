@@ -1,24 +1,60 @@
 import java.util.Date;
 public class ClientePF extends Cliente {
     private final String CPF;
-    private Date dataNascimento;
+    private String genero;
+    private Date dataLicenca;
+    private String educacao;
+    private final Date dataNascimento;
+    private String classeEconomica;
 
-    public ClientePF(String nome, String endereco, String educacao, String genero, String classeEconomica, String CPF, Date dataNascimento) {
-        super(nome, endereco, educacao, genero, classeEconomica);
+    public ClientePF(String nome, String endereco, String educacao, String genero, String classeEconomica, String CPF, Date dataNascimento, Date dataLicenca) {
+        super(nome, endereco);
         this.CPF = CPF;
         this.dataNascimento = dataNascimento;
+        this.genero = genero;
+        this.dataLicenca = dataLicenca;
+        this.educacao = educacao;
+        this.classeEconomica = classeEconomica;
     }
 
     public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date newDataNascimento) {
-        dataNascimento = newDataNascimento;
-    }
-
     public String getCPF() {
         return CPF;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setDataLicenca(Date dataLicenca) {
+        this.dataLicenca = dataLicenca;
+    }
+
+    public Date getDataLicenca() {
+        return dataLicenca;
+    }
+
+    public void setEducacao (String educacao) {
+        this.educacao = educacao;
+    }
+
+    public String getEducacao () {
+        return educacao;
+    }
+
+    public void setClasseEconomica(String classeEconomica) {
+        this.classeEconomica = classeEconomica;
+    }
+
+    public String getClasseEconomica () {
+        return classeEconomica;
     }
 
     public boolean validarCPF () {
@@ -81,7 +117,6 @@ public class ClientePF extends Cliente {
 
     @Override
     public String toString () {
-        String s = "-----CLIENTE-----" + "\nNome: " + super.getNome() + "\nEndereco: " + super.getEndereco() + "\nData de Licença: " + super.getDataLicenca() + "\nEducação: " + super.getEducacao() + "\nGênero: " + super.getGenero() + "\nClasse Econômica: " + super.getClasseEconomica() + "\nLista de Veículos: " + super.getListaVeiculos() + "\nCPF: " + CPF + "\nData de Nascimento: " + dataNascimento + "\n-----------------";
-        return s;
+        return "-----CLIENTE-----" + "\nNome: " + super.getNome() + "\nEndereco: " + super.getEndereco() + "\nData de Licença: " + getDataLicenca() + "\nEducação: " + getEducacao() + "\nGênero: " + getGenero() + "\nClasse Econômica: " + getClasseEconomica() + "\nLista de Veículos: " + super.getListaVeiculos() + "\nCPF: " + CPF + "\nData de Nascimento: " + dataNascimento + "\n-----------------";
     }
 }
