@@ -1,13 +1,13 @@
-import java.util.Date;
+import java.util.Calendar;
 public class ClientePF extends Cliente {
     private final String CPF;
     private String genero;
-    private Date dataLicenca;
+    private Calendar dataLicenca;
     private String educacao;
-    private final Date dataNascimento;
+    private final Calendar dataNascimento;
     private String classeEconomica;
 
-    public ClientePF(String nome, String endereco, String educacao, String genero, String classeEconomica, String CPF, Date dataNascimento, Date dataLicenca) {
+    public ClientePF(String nome, String endereco, String educacao, String genero, String classeEconomica, String CPF, Calendar dataNascimento, Calendar dataLicenca) {
         super(nome, endereco);
         this.CPF = CPF;
         this.dataNascimento = dataNascimento;
@@ -17,7 +17,7 @@ public class ClientePF extends Cliente {
         this.classeEconomica = classeEconomica;
     }
 
-    public Date getDataNascimento() {
+    public Calendar getDataNascimento() {
         return dataNascimento;
     }
 
@@ -33,11 +33,11 @@ public class ClientePF extends Cliente {
         return genero;
     }
 
-    public void setDataLicenca(Date dataLicenca) {
+    public void setDataLicenca(Calendar dataLicenca) {
         this.dataLicenca = dataLicenca;
     }
 
-    public Date getDataLicenca() {
+    public Calendar getDataLicenca() {
         return dataLicenca;
     }
 
