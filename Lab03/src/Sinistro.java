@@ -27,10 +27,13 @@ public class Sinistro {
     }
 
     //Construtor
-    public Sinistro (String data, String endereco) {
+    public Sinistro (String data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
         this.ID = generateRandomId();
         this.data = data;
         this.endereco = endereco;
+        this.seguradora = seguradora;
+        this.veiculo = veiculo;
+        this.cliente = cliente;
     }
 
     //Getters and setters

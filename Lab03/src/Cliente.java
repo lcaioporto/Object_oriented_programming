@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 public class Cliente {
     private String nome;
     private String endereco;
@@ -37,8 +38,22 @@ public class Cliente {
         return"-----CLIENTE-----" + "\nNome: " + nome + "\nEndereco: " + endereco + "\nLista de Veículos: " + listaVeiculos + "\n-----------------";
     }
 
-    public boolean cadastrarVeiculo(Veiculo v) {
+    public boolean cadastrarVeiculo(Scanner sc) {
         try {
+            //placa
+            System.out.println("Insira a placa do veículo: ");
+            String placa = sc.nextLine();
+            //marca
+            System.out.println("Insira a marca do veículo: ");
+            String marca = sc.nextLine();
+            //modelo
+            System.out.println("Insira o modelo do veículo: ");
+            String modelo = sc.nextLine();
+            //ano de fabricação
+            System.out.println("Insira o ano de fabricação do veículo: ");
+            int anoFabricacao = Integer.parseInt(sc.nextLine());
+            //criar objeto veículo
+            Veiculo v = new Veiculo(placa, marca, modelo, anoFabricacao);
             listaVeiculos.add(v);
             return true;
         }
