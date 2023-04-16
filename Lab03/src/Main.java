@@ -25,7 +25,7 @@ public class Main {
             System.out.println("Com o que deseja-se lidar?");
             System.out.println("1) Clientes");
             System.out.println("2) Sinistro");
-            System.out.println("3) Cadastro veículos");
+            System.out.println("3) Cadastro de veículos");
             System.out.println("4) Cadastro de uma nova seguradora");
             System.out.println("5) Fechar Menu");
             System.out.println("==========================");
@@ -66,7 +66,6 @@ public class Main {
                         case 3:
                             System.out.println("===== Listando todos os clientes =====");
                             seguradoraAtual.listarClientes();
-                            System.out.println("==========================");
                             break;
                         case 4:
                             check = seguradoraAtual.printInfoCliente(sc);
@@ -79,7 +78,7 @@ public class Main {
 
                 case 2:
                 do {
-                    System.out.println("=== SINISTRO ===");
+                    System.out.println("====== SINISTRO ======");
                     System.out.println("O que você deseja fazer?");
                     System.out.println("1) Gerar um novo sinistro");
                     System.out.println("2) Visualizar um sinsitro");

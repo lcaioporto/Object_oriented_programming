@@ -35,7 +35,7 @@ public class Cliente {
 
     @Override
     public String toString () {
-        return"-----CLIENTE-----" + "\nNome: " + nome + "\nEndereco: " + endereco + "\nLista de Veículos: " + listaVeiculos + "\n-----------------";
+        return "=========CLIENTE=========" + "\nNome: " + nome + "\nEndereco: " + endereco + "\nLista de Veículos: " + listaVeiculos + "\n=========================";
     }
 
     public boolean cadastrarVeiculo(Scanner sc) {

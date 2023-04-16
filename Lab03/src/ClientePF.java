@@ -1,4 +1,5 @@
 import java.util.Calendar;
+import java.util.Date;
 public class ClientePF extends Cliente {
     private final String CPF;
     private String genero;
@@ -17,8 +18,8 @@ public class ClientePF extends Cliente {
         this.classeEconomica = classeEconomica;
     }
 
-    public Calendar getDataNascimento() {
-        return dataNascimento;
+    public Date getDataNascimento() {
+        return dataNascimento.getTime();
     }
 
     public String getCPF() {
@@ -37,8 +38,8 @@ public class ClientePF extends Cliente {
         this.dataLicenca = dataLicenca;
     }
 
-    public Calendar getDataLicenca() {
-        return dataLicenca;
+    public Date getDataLicenca() {
+        return dataLicenca.getTime();
     }
 
     public void setEducacao (String educacao) {
@@ -117,6 +118,6 @@ public class ClientePF extends Cliente {
 
     @Override
     public String toString () {
-        return "-----CLIENTE-----" + "\nNome: " + super.getNome() + "\nEndereco: " + super.getEndereco() + "\nData de Licença: " + getDataLicenca() + "\nEducação: " + getEducacao() + "\nGênero: " + getGenero() + "\nClasse Econômica: " + getClasseEconomica() + "\nLista de Veículos: " + super.getListaVeiculos() + "\nCPF: " + CPF + "\nData de Nascimento: " + dataNascimento + "\n-----------------";
+        return "=========CLIENTE=========" + "\nNome: " + super.getNome() + "\nEndereco: " + super.getEndereco() + "\nData de Licença: " + getDataLicenca() + "\nEducação: " + getEducacao() + "\nGênero: " + getGenero() + "\nClasse Econômica: " + getClasseEconomica() + "\nLista de Veículos: " + super.getListaVeiculos() + "\nCPF: " + getCPF() + "\nData de Nascimento: " + getDataNascimento() + "\n=========================";
     }
 }

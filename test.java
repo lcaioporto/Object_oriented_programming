@@ -4,6 +4,10 @@ class Funcionario {
     public Funcionario (String umNome) {
         this.nome = umNome;
     }
+
+    public String getNome() {
+        return nome;
+    }
     public int getSum(int a, int b) {
         return a + b;
     }
@@ -14,13 +18,8 @@ class Funcionario {
         System.out.println(s);
     }
     public static void main(String[] args){
-        int a = 4;
-        int b = 3;
         Funcionario f = new Funcionario("Nome1");
-        if (a > b) {
-            int s = f.getSum(a, b);
-            System.out.println(s);
-            System.out.println(f.nome);
-        }
+        System.out.println(f.getNome());
+        System.out.println(f.getNome());
     }
 }

@@ -56,30 +56,39 @@ public class Seguradora {
 
     public boolean cadastrarCliente(Scanner sc) {
         try {
-            //CHECAR A VALIDAÇÃO DO CPF
             System.out.println("Insira o nome do cliente: ");
             String nome = sc.nextLine();
             System.out.println("Insira o endereço do cliente: ");
             String endereco_cliente = sc.nextLine();
             System.out.println("Cliente PJ (Pessoa Jurídica) ou PF (Pessoa Física)? ");
-            String pj_pf = sc.nextLine();
+            String pj_pf = sc.nextLine().toUpperCase();
             
             if (pj_pf.equals("PJ")) { //Cliente PJ
-                System.out.println("Insira o CNPJ do cliente: ");
-
-                String CNPJ = sc.nextLine();
                 //Data de fundação
                 System.out.println("Insira o ano de fundação: ");
                 int ano = Integer.parseInt(sc.nextLine());
                 System.out.println("Insira o mês de fundação: ");
-                int mes = Integer.parseInt(sc.nextLine());
+                int mes = Integer.parseInt(sc.nextLine()) - 1;
                 System.out.println("Insira o dia de fundação: ");
                 int dia = Integer.parseInt(sc.nextLine());
                 Calendar dataFundacao = new GregorianCalendar(ano, mes, dia);
+                //CNPJ
+                System.out.println("Insira o CNPJ do cliente: ");
+                String CNPJ = sc.nextLine();
                 //Criar objeto ClientePJ
                 ClientePJ c = new ClientePJ(nome, endereco_cliente, CNPJ, dataFundacao);
-                listaClientesPJ.add(c);
-                listaClientes.add(c);
+                if (!c.validarCNPJ()) {
+                    System.out.println("===============================");
+                    System.out.println("CNPJ inválido. Tente novamente.");
+                    System.out.println("===============================");
+                    return cadastrarCliente(sc);
+                }
+                else {
+                    System.out.println("===============================");
+                    System.out.println("CNPJ válido!");
+                    listaClientesPJ.add(c);
+                    listaClientes.add(c);
+                }
             }
             else if (pj_pf.equals("PF")) { //Cliente PF
                 //educação
@@ -91,14 +100,11 @@ public class Seguradora {
                 //classe econômica
                 System.out.println("Insira a classe econômica do cliente: ");
                 String classeEconomica = sc.nextLine();
-                //CPF
-                System.out.println("Insira o CPF do cliente: ");
-                String CPF = sc.nextLine();
                 //DATA NASCIMENTO
                 System.out.println("Insira o ano de nascimento: ");
                 int ano = Integer.parseInt(sc.nextLine());
                 System.out.println("Insira o mês de nascimento: ");
-                int mes = Integer.parseInt(sc.nextLine());
+                int mes = Integer.parseInt(sc.nextLine()) - 1;
                 System.out.println("Insira o dia de nascimento: ");
                 int dia = Integer.parseInt(sc.nextLine());
                 Calendar dataNascimento = new GregorianCalendar(ano, mes, dia);
@@ -110,13 +116,30 @@ public class Seguradora {
                 System.out.println("Insira o dia de expedição da lincença: ");
                 dia = Integer.parseInt(sc.nextLine());
                 Calendar dataLicenca = new GregorianCalendar(ano, mes, dia);
+                //CPF
+                System.out.println("Insira o CPF do cliente: ");
+                String CPF = sc.nextLine();
                 //Criar objeto ClientePF
                 ClientePF c = new ClientePF(nome, endereco_cliente, educacao, genero, classeEconomica, CPF, dataNascimento, dataLicenca);
-                listaClientesPF.add(c);
-                listaClientes.add(c);
+
+                if (!c.validarCPF()) {
+                    System.out.println("===============================");
+                    System.out.println("CPF inválido. Tente novamente.");
+                    System.out.println("===============================");
+                    return cadastrarCliente(sc);
+                }
+                else {
+                    System.out.println("===============================");
+                    System.out.println("CPF válido!");
+                    listaClientesPF.add(c);
+                    listaClientes.add(c);
+                }
             }
             else {
-                System.out.println("Responda apenas com 'PF' ou 'PJ'.");
+                System.out.println("==================================================");
+                System.out.println("Responda apenas com 'PF' ou 'PJ'. Tente novamente.");
+                System.out.println("==================================================");
+                return cadastrarCliente(sc);
             }
             return true;
         }
@@ -271,7 +294,9 @@ public class Seguradora {
         if (pf_pj.equals("PF")) { return buscaClientePF(sc); }
         else if (pf_pj.equals("PJ")) return buscaClientePJ(sc);
         else {
-            System.out.println("Deve-se responder apenas com 'PF' ou 'PJ'. Tente novamente.");
+            System.out.println("==================================================");
+            System.out.println("Responda apenas com 'PF' ou 'PJ'. Tente novamente.");
+            System.out.println("==================================================");
             return buscarCliente(sc);
         }
     }

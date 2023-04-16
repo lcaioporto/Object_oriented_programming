@@ -1,4 +1,5 @@
 import java.util.Calendar;
+import java.util.Date;
 import java.util.ArrayList;
 public class ClientePJ extends Cliente {
     private final String CNPJ;
@@ -10,8 +11,8 @@ public class ClientePJ extends Cliente {
         this.dataFundacao = dataFundacao;
     }
 
-    public Calendar getDataFundacao() {
-        return dataFundacao;
+    public Date getDataFundacao() {
+        return dataFundacao.getTime();
     }
 
     public void setDataFundacao(Calendar newDataFundacao) {
@@ -24,7 +25,7 @@ public class ClientePJ extends Cliente {
 
     @Override
     public String toString () {
-        return "-----CLIENTE-----" + "\nNome: " + super.getNome() + "\nEndereco: " + super.getEndereco() +  "\nLista de Veículos: " + super.getListaVeiculos() + "\nCNPJ: " + CNPJ + "\nData de Fundação: " + dataFundacao + "\n-----------------";
+        return "=========CLIENTE=========" + "\nNome: " + super.getNome() + "\nEndereco: " + super.getEndereco() +  "\nLista de Veículos: " + super.getListaVeiculos() + "\nCNPJ: " + CNPJ + "\nData de Fundação: " + dataFundacao + "\n=========================";
     }
 
     public boolean validarCNPJ() {
