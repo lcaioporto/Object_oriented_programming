@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Cliente {
     private String nome;
     private String endereco;
-    private ArrayList<Veiculo> listaVeiculos;
+    private ArrayList<Veiculo> listaVeiculos; //contém todos os veículos de um certo cliente
 
     //Construtor
     public Cliente (String nome, String endereco) {
@@ -39,6 +39,9 @@ public class Cliente {
     }
 
     public boolean cadastrarVeiculo(Scanner sc) {
+        //Recebe todas as informações necessárias para criar um objeto Veículo.
+        //O objeto criado é associado ao cliente, adicionando-o na lista de veiculos.
+        //Caso o método funcione adequadamente, retrona true; c.c retorna false.
         try {
             //placa
             System.out.println("Insira a placa do veículo: ");
@@ -58,5 +61,18 @@ public class Cliente {
             return true;
         }
         catch (Exception e) { return false; }
+    }
+
+    public boolean removeVeiculo (Scanner sc) {
+        //Remove um veículo a partir de sua placa
+        System.out.println("Insira a placa do veículo: ");
+        String palca = sc.nextLine();
+        for (int i = 0; i < listaVeiculos.size(); i++) {
+            if (listaVeiculos.get(i).getPlaca().equals(palca)) {
+                listaVeiculos.remove(i);
+                return true;
+            }
+        }
+        return false; //caso em que o veículo buscado não existe
     }
 }

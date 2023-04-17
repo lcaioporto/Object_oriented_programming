@@ -29,12 +29,14 @@ public class ClientePJ extends Cliente {
     }
 
     public boolean validarCNPJ() {
+        //Algoritimo de validação de CNPJ.
+        //Caso o CPF seja válido, retorna true; c.c. retorna false.
         String auxCNPJ = CNPJ.replaceAll("[^0-9]", ""); //retira caracteres que não são dígitos
         String digVerificadores = "", strVerificador1 = "", strVerificador2 = "";
-        boolean allEqual = true; //auxiliar para verificar se todos os dígitos do CPF são iguais
+        boolean allEqual = true; //auxiliar para verificar se todos os dígitos do CNPJ são iguais
         char charCurrDigit;
         int strLength = auxCNPJ.length();
-        int currDigit; //dígito atual - usado para iterar o cpf
+        int currDigit; //dígito atual - usado para iterar o CNPJ
         int sum1 = 0, sum2 = 0; //soma da multiplicação do dígito atual pelo multiplicador, para calcular os digitos verificadores
         int verificador1, verificador2, rest; //dígitos verificadores; "rest" é um auxiliar usado para guardar o resto de uma divisão
 

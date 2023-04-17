@@ -1,6 +1,6 @@
 import java.util.Random;
 public class Sinistro {
-    private final int ID; //garantir que o ID é único
+    private final int ID;
     private String data;
     private String endereco;
     private Seguradora seguradora;
@@ -14,9 +14,8 @@ public class Sinistro {
         try {
             int n = (Seguradora.listaSinistro).size();
             for (int i = 0; i < n; i++) {
-                if (((Seguradora.listaSinistro).get(i)).getId() == randomId) {
-                    generateRandomId();
-                    break;
+                if (Seguradora.listaSinistro.get(i).getId() == randomId) { //caso em que o ID gerado já existe
+                    return generateRandomId(); //garante que o ID a ser criado será único
                 }
             }
             return randomId;

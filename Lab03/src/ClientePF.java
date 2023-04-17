@@ -59,6 +59,8 @@ public class ClientePF extends Cliente {
     }
 
     public boolean validarCPF () {
+        //Algoritimo de validação de CPF.
+        //Caso o CPF seja válido, retorna true; c.c. retorna false.
         String auxCpf = CPF.replaceAll("[^0-9]", ""); //retira caracteres que não são dígitos
         String digVerificadores = "", strVerificador1 = "", strVerificador2 = "";
         boolean allEqual = true; //auxiliar para verificar se todos os dígitos do CPF são iguais
