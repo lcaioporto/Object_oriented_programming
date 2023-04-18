@@ -21,5 +21,6 @@ class Funcionario {
         Funcionario f = new Funcionario("Nome1");
         System.out.println(f.getNome());
         System.out.println(f.getNome());
+        System.out.println(f.getClass());
     }
 }

@@ -7,7 +7,8 @@ public class Seguradora {
     private ArrayList<Cliente> listaClientes; //lista de todos os clientes da seguradora
     private ArrayList<ClientePF> listaClientesPF; //lista dos clientes do tipo PF (Pessoa Física)
     private ArrayList<ClientePJ> listaClientesPJ; //lista dos clientes do tipo PJ (Pessoa Jurídica)
-    public static ArrayList<Sinistro> listaSinistro; //lista com todos os sinistros da seguradora
+    public static ArrayList<Sinistro> listaSinistro; //lista com todos os sinistros da seguradora; 
+    //Obs: listaSinistro é public para poder ser acessada na classe "Sinistro" afim de garantir ID's únicos para cada Sinistro
 
     //Construtor da Seguradora
     public Seguradora (String nome, String telefone, String email, String endereco) {
@@ -156,20 +157,13 @@ public class Seguradora {
         try {
             Cliente cliente = buscarCliente(sc);
             if (cliente == null) return false;
-            String nome_cliente = cliente.getNome();
             try { //Cliente PF
             listaClientesPF.remove(listaClientesPF.indexOf(cliente));
             }
             catch (Exception e) { //Cliente PJ
                 listaClientesPJ.remove(listaClientesPJ.indexOf(cliente)); 
             }
-            
-            for (int i = 0; i < listaClientes.size(); i++) { //remover da lista geral de todos os clientes
-                if (listaClientes.get(i).getNome().equals(nome_cliente)) {
-                    listaClientes.remove(i);
-                    break;
-                }
-            }
+            listaClientes.remove(listaClientes.indexOf(cliente)); //remover da lista geral de todos os clientes
         return true;
         }
         catch (Exception e) { return false; }
@@ -183,13 +177,14 @@ public class Seguradora {
             Cliente cliente = buscarCliente(sc);
             if (cliente == null) { return false; }
             //Veículo
+            System.out.println("\n");
             Veiculo veiculo = buscaVeiculo(sc, cliente);
             if (veiculo == null) { return false; }
             //Data
-            System.out.println("Insira a data do Sinistro: ");
+            System.out.println("\nInsira a data do Sinistro: ");
             String data = sc.nextLine();
             //Endereço
-            System.out.println("\nInsira o endereço do sinistro: ");
+            System.out.println("Insira o endereço do sinistro: ");
             String endereco_sinistro = sc.nextLine();
             //objeto Sinistro
             Sinistro s = new Sinistro(data, endereco_sinistro, seguradora, veiculo, cliente);
@@ -222,7 +217,7 @@ public class Seguradora {
     public boolean listarSinistro() {
         //Printa informações de todos os Sinistros da Seguradora
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
-        if (listaClientes.size() == 0) {
+        if (listaSinistro.size() == 0) {
             return false;
         }
         for (int i = 0; i < listaSinistro.size(); i++) {

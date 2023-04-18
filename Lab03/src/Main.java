@@ -190,8 +190,8 @@ public class Main {
                             System.out.println("Insira o ID do sinistro: ");
                             id = Integer.parseInt(sc.nextLine());
                             check = seguradoraAtual.removerSinistro(id);
+                            System.out.println("========================================");
                             if (!check) {
-                                System.out.println("========================================");
                                 System.out.println("O sinistro buscado não existe. Tente novamente.");
                             }
                             else System.out.println("Sinsitro removido com sucesso.");
