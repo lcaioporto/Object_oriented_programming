@@ -44,16 +44,16 @@ public class Cliente {
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
         try {
             //placa
-            System.out.println("Insira a placa do veículo: ");
+            System.out.println("\nInsira a placa do veículo: ");
             String placa = sc.nextLine();
             //marca
-            System.out.println("Insira a marca do veículo: ");
+            System.out.println("\nInsira a marca do veículo: ");
             String marca = sc.nextLine();
             //modelo
-            System.out.println("Insira o modelo do veículo: ");
+            System.out.println("\nInsira o modelo do veículo: ");
             String modelo = sc.nextLine();
             //ano de fabricação
-            System.out.println("Insira o ano de fabricação do veículo: ");
+            System.out.println("\nInsira o ano de fabricação do veículo: ");
             int anoFabricacao = Integer.parseInt(sc.nextLine());
             //criar objeto veículo
             Veiculo v = new Veiculo(placa, marca, modelo, anoFabricacao);

@@ -206,7 +206,7 @@ public class Seguradora {
             return false;
         }
         for (int i = 0; i < listaClientes.size(); i++) {
-            System.out.println(listaClientes.get(i));
+            System.out.println("\n" + listaClientes.get(i));
         }
         return true;
     }

@@ -134,8 +134,8 @@ public class Main {
                                     }
                                     check = cliente.removeVeiculo(sc);
                                     System.out.println("==========================");
-                                    if (check) System.out.println("Cadastro de veículo realizado com sucesso!");
-                                    else System.out.println("Ocorreu um erro no cadastro do veículo. Tente novamente.");
+                                    if (check) System.out.println("Veículo removido com sucesso!");
+                                    else System.out.println("Ocorreu um erro na remoção do veículo. Tente novamente.");
                                     System.out.println("==========================");
                                     break;
                             }
@@ -244,41 +244,6 @@ public class Main {
                 break;
         }
     } while (input != 6);
-
-        /*
-        //Criação da seguradora e cadastro de clientes
-        Seguradora seguradoraX = new Seguradora("Nome Seguradora", "3344559977", "seguradora@gmail.com", "Endereço seguradora");
-        seguradoraX.cadastrarCliente(sc); //recebe input de informações para gerar o cliente 1 - para o exemplo, cria-se um PF
-        seguradoraX.cadastrarCliente(sc); //cliente 2 - para o exemplo, assume-se que é criado um PJ
-
-        //cliente 1: no exemplo, é PF
-        ClientePF c1 = seguradoraX.listarClientesPF().get(0);
-        System.out.println(c1.validarCPF());
-
-        //cliente 2: no exemplo, é PJ
-        ClientePJ c2 = seguradoraX.listarClientesPJ().get(0); 
-        System.out.println(c2.validarCNPJ());
-
-        //cadastro de veículos para cada cliente - o próprio método recebe input das variáveis e cria o objeto veículo.
-        c1.cadastrarVeiculo(sc);
-        c2.cadastrarVeiculo(sc);
-
-        //remoção de clientes
-        seguradoraX.removerCliente(sc); //o método recebe todos os inputs necessários para remover um determinado cliente.
-
-        //Gerar Sinistro
-        seguradoraX.gerarSinistro(sc, seguradoraX, c2.getListaVeiculos().get(0), c2); //recebe a seguradora, o veículo e o cliente como parâmetros; e recebe input da data e endereço internamente
-        seguradoraX.gerarSinistro(sc, seguradoraX, c1.getListaVeiculos().get(0), c1);
-
-        //Visualizar sinistro do cliente c2
-        seguradoraX.visualizarSinistro(c2);
-
-        //Listas sinistros
-        seguradoraX.listarSinistro();
-
-        //toString()
-        System.out.println
-        */
         System.out.println("===== MENU ENCERRADO =====");
         sc.close();
     }
