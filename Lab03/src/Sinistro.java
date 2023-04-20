@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.ArrayList;
 public class Sinistro {
     private final int ID;
     private String data;
@@ -6,15 +7,16 @@ public class Sinistro {
     private Seguradora seguradora;
     private Veiculo veiculo;
     private Cliente cliente;
+    private static ArrayList<Integer> listaID; //lista com todos os ID's já criados; usado para não permitir nenhum ID repetido; 
 
     public int generateRandomId () {
         //função que gera e retorna um id aleatório entre 0 e 999999.
         Random rand = new Random();
         int randomId = rand.nextInt(999999); //gera um número inteiro aleatório entre 0 e 999999.
         try {
-            int n = (Seguradora.listaSinistro).size();
+            int n = listaID.size();
             for (int i = 0; i < n; i++) {
-                if (Seguradora.listaSinistro.get(i).getId() == randomId) { //caso em que o ID gerado já existe
+                if (listaID.contains(randomId)) { //caso em que o ID gerado já existe
                     return generateRandomId(); //garante que o ID a ser criado será único
                 }
             }
@@ -28,6 +30,8 @@ public class Sinistro {
     //Construtor
     public Sinistro (String data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
         this.ID = generateRandomId();
+        ArrayList<Integer> listaID = new ArrayList<Integer>();
+        listaID.add(this.ID);
         this.data = data;
         this.endereco = endereco;
         this.seguradora = seguradora;

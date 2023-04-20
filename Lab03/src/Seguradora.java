@@ -7,8 +7,7 @@ public class Seguradora {
     private ArrayList<Cliente> listaClientes; //lista de todos os clientes da seguradora
     private ArrayList<ClientePF> listaClientesPF; //lista dos clientes do tipo PF (Pessoa Física)
     private ArrayList<ClientePJ> listaClientesPJ; //lista dos clientes do tipo PJ (Pessoa Jurídica)
-    public static ArrayList<Sinistro> listaSinistro; //lista com todos os sinistros da seguradora; 
-    //Obs: listaSinistro é public para poder ser acessada na classe "Sinistro" afim de garantir ID's únicos para cada Sinistro
+    private static ArrayList<Sinistro> listaSinistro; //lista com todos os sinistros da seguradora;
 
     //Construtor da Seguradora
     public Seguradora (String nome, String telefone, String email, String endereco) {
@@ -61,7 +60,7 @@ public class Seguradora {
         try {
             //Informações padrões de todos os clientes
             System.out.println("Insira o nome do cliente: ");
-            String nome = sc.nextLine();
+            String nome_cliente = sc.nextLine();
             System.out.println("\nInsira o endereço do cliente: ");
             String endereco_cliente = sc.nextLine();
             System.out.println("\nCliente PJ (Pessoa Jurídica) ou PF (Pessoa Física)? ");
@@ -80,7 +79,7 @@ public class Seguradora {
                 System.out.println("\nInsira o CNPJ do cliente: ");
                 String CNPJ = sc.nextLine();
                 //Criar objeto ClientePJ
-                ClientePJ c = new ClientePJ(nome, endereco_cliente, CNPJ, dataFundacao);
+                ClientePJ c = new ClientePJ(nome_cliente, endereco_cliente, CNPJ, dataFundacao);
                 //Validação do CNPJ
                 if (!c.validarCNPJ()) {
                     System.out.println("===============================");
@@ -125,7 +124,7 @@ public class Seguradora {
                 System.out.println("\nInsira o CPF do cliente: ");
                 String CPF = sc.nextLine();
                 //Criar objeto ClientePF
-                ClientePF c = new ClientePF(nome, endereco_cliente, educacao, genero, classeEconomica, CPF, dataNascimento, dataLicenca);
+                ClientePF c = new ClientePF(nome_cliente, endereco_cliente, educacao, genero, classeEconomica, CPF, dataNascimento, dataLicenca);
                 //Validação do CPF
                 if (!c.validarCPF()) {
                     System.out.println("===============================");
