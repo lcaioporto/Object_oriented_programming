@@ -1,5 +1,7 @@
 import java.util.*;
 public class Seguradora {
+
+    //DEIXAR UMA LISTA APENAS - listaClientes
     private String nome;
     private String telefone;
     private String email;
@@ -153,7 +155,6 @@ public class Seguradora {
     public boolean removerCliente(Scanner sc) {
         //Remove um determinado cliente da lista de clientes de uma Seguradora
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
-        //Os sinistros relacionados ao cliente não são removidos porque a lista de sinistros é pensada como um registro de sinistros.
         try {
             Cliente cliente = buscarCliente(sc);
             if (cliente == null) return false;
@@ -197,6 +198,7 @@ public class Seguradora {
     public boolean listarClientes() {
         //Printa informações de todos os clientes da Seguradora.
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
+        //ArrayList<Cliente> listaClientes = new ArrayList<>();
         if (listaClientes.size() == 0) {
             return false;
         }
