@@ -1,14 +1,10 @@
 import java.util.*;
 public class Seguradora {
-
-    //DEIXAR UMA LISTA APENAS - listaClientes
     private String nome;
     private String telefone;
     private String email;
     private String endereco;
     private ArrayList<Cliente> listaClientes; //lista de todos os clientes da seguradora
-    private ArrayList<ClientePF> listaClientesPF; //lista dos clientes do tipo PF (Pessoa Física)
-    private ArrayList<ClientePJ> listaClientesPJ; //lista dos clientes do tipo PJ (Pessoa Jurídica)
     private static ArrayList<Sinistro> listaSinistro; //lista com todos os sinistros da seguradora;
 
     //Construtor da Seguradora
@@ -18,8 +14,6 @@ public class Seguradora {
         this.email = email;
         this.endereco = endereco;
         listaClientes = new ArrayList<Cliente>();
-        listaClientesPF = new ArrayList<ClientePF>();
-        listaClientesPJ = new ArrayList<ClientePJ>();
         listaSinistro = new ArrayList<Sinistro>();
     }
 
@@ -92,7 +86,6 @@ public class Seguradora {
                 else {
                     System.out.println("===============================");
                     System.out.println("CNPJ válido!");
-                    listaClientesPJ.add(c);
                     listaClientes.add(c);
                 }
             }
@@ -137,7 +130,6 @@ public class Seguradora {
                 else {
                     System.out.println("===============================");
                     System.out.println("CPF válido!");
-                    listaClientesPF.add(c);
                     listaClientes.add(c);
                 }
             }
@@ -155,17 +147,12 @@ public class Seguradora {
     public boolean removerCliente(Scanner sc) {
         //Remove um determinado cliente da lista de clientes de uma Seguradora
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
+        //Os sinistros relacionados ao cliente não são removidos porque a lista de sinistros é pensada como um registro de sinistros.
         try {
             Cliente cliente = buscarCliente(sc);
             if (cliente == null) return false;
-            try { //Cliente PF
-            listaClientesPF.remove(listaClientesPF.indexOf(cliente));
-            }
-            catch (Exception e) { //Cliente PJ
-                listaClientesPJ.remove(listaClientesPJ.indexOf(cliente)); 
-            }
             listaClientes.remove(listaClientes.indexOf(cliente)); //remover da lista geral de todos os clientes
-        return true;
+            return true;
         }
         catch (Exception e) { return false; }
     }
@@ -176,11 +163,11 @@ public class Seguradora {
         try {
             //Cliente
             Cliente cliente = buscarCliente(sc);
-            if (cliente == null) { return false; }
+            if (cliente == null) { return false; } //cliente não encontrado
             //Veículo
             System.out.println("\n");
             Veiculo veiculo = buscaVeiculo(sc, cliente);
-            if (veiculo == null) { return false; }
+            if (veiculo == null) { return false; } //veiculo não encontrado
             //Data
             System.out.println("\nInsira a data do Sinistro: ");
             String data = sc.nextLine();
@@ -198,22 +185,13 @@ public class Seguradora {
     public boolean listarClientes() {
         //Printa informações de todos os clientes da Seguradora.
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
-        //ArrayList<Cliente> listaClientes = new ArrayList<>();
         if (listaClientes.size() == 0) {
             return false;
         }
-        for (int i = 0; i < listaClientes.size(); i++) {
-            System.out.println("\n" + listaClientes.get(i));
+        for (Cliente c : listaClientes) {
+            System.out.println("\n" + c);
         }
         return true;
-    }
-
-    public ArrayList<ClientePF> listarClientesPF () {
-        return listaClientesPF;
-    }
-
-    public ArrayList<ClientePJ> listarClientesPJ () {
-        return listaClientesPJ;
     }
 
     public boolean listarSinistro() {
@@ -222,8 +200,8 @@ public class Seguradora {
         if (listaSinistro.size() == 0) {
             return false;
         }
-        for (int i = 0; i < listaSinistro.size(); i++) {
-            System.out.println(listaSinistro.get(i));
+        for (Sinistro s : listaSinistro) {
+            System.out.println("\n" + s);
         }
         return true;
     }
@@ -232,16 +210,13 @@ public class Seguradora {
         //dado um certo ID, remove o sinistro que tem esse ID da lista de Sinistros da seguradora.
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
         try {
-            int encontrou = 0;
-            for (int i = 0; i < listaSinistro.size(); i++) {
-                if (listaSinistro.get(i).getId() == id) {
-                    listaSinistro.remove(i);
-                    encontrou = 1;
-                    break;
+            for (Sinistro s : listaSinistro) {
+                if (s.getId() == id) {
+                    listaSinistro.remove(listaSinistro.indexOf(s));
+                    return true;
                 }
             }
-            if (encontrou == 0) { return false; }
-            return true;
+            return false;
         }
         catch (Exception e) { return false; }
     }
@@ -258,79 +233,67 @@ public class Seguradora {
         catch (Exception e) { return false; }
     }
 
-    public ClientePF buscaClientePF(Scanner sc) {
-        //Pede o input do CPF do cliente e faz sua busca na lista de clientes PF.
-        System.out.println("\nInsira o CPF do cliente: ");
-        String cpf = sc.nextLine();
-        String currCPF;
-        cpf = cpf.replaceAll("[^0-9]", "");
-
-        for (int i = 0; i < listaClientesPF.size(); i++) {
-            currCPF = listaClientesPF.get(i).getCPF().replaceAll("[^0-9]", "");
-            if (currCPF.equals(cpf)) {
-                return listaClientesPF.get(i);
-            }
-        }
-        return null; //caso em que o cliente buscado não existe
-    }
-
-    public ClientePJ buscaClientePJ(Scanner sc) {
-        //Pede o input do CNPJ do cliente e faz sua busca na lista de clientes PJ.
-        System.out.println("\nInsira o CNPJ do cliente: ");
-        String CNPJ = sc.nextLine();
-        CNPJ = CNPJ.replaceAll("[^0-9]", "");
-
-        for (int i = 0; i < listaClientesPJ.size(); i++) {
-            String currCNPJ = listaClientesPJ.get(i).getCNPJ().replaceAll("[^0-9]", "");
-            if (currCNPJ.equals(CNPJ)) {
-                return listaClientesPJ.get(i);
-            }
-        }
-        return null; //caso em que o cliente buscado não existe
-    }
-
     public Veiculo buscaVeiculo (Scanner sc, Cliente c) {
         //Busca um veículo na lista de veículos de um dado Cliente c, recebendo a informação da placa
         //Usada para gerar um sinistro
         System.out.println("Insira a placa do veículo: ");
         String palca = sc.nextLine();
-        for (int i = 0; i < c.getListaVeiculos().size(); i++) {
-            if (c.getListaVeiculos().get(i).getPlaca().equals(palca)) return c.getListaVeiculos().get(i);
+        for (Veiculo v : c.getListaVeiculos()) {
+            if (v.getPlaca().equals(palca)) return v;
         }
         return null; //caso em que o veículo buscado não existe
     }
 
     public Cliente buscarCliente (Scanner sc) {
-        //Utiliza as funções "buscaClientePF()" e "buscarClientePJ()" para buscar qualquer cliente
+        //Recebe inputs e a partir das informações retorna um cliente específico.
         System.out.println("Cliente é PF ou PJ?: ");
         String pf_pj = sc.nextLine().toUpperCase();
-        if (pf_pj.equals("PF")) { return buscaClientePF(sc); }
-        else if (pf_pj.equals("PJ")) return buscaClientePJ(sc);
+        String id;
+
+        if (pf_pj.equals("PF")) {
+            System.out.println("\nInsira o CPF do cliente: ");
+            id = sc.nextLine().replaceAll("[^0-9]", "");
+        }
+        else if (pf_pj.equals("PJ")) {
+            System.out.println("\nInsira o CNPJ do cliente: ");
+            id = sc.nextLine().replaceAll("[^0-9]", "");
+        }
         else {
             System.out.println("==================================================");
             System.out.println("Responda apenas com 'PF' ou 'PJ'. Tente novamente.");
             System.out.println("==================================================");
             return buscarCliente(sc);
         }
+        for (Cliente currCliente : listaClientes) {
+            if (returnIdCliente(currCliente).equals(id)) {
+                return currCliente;
+            }
+        }
+        return null; //cliente não encontrado
     }
 
     public boolean visualizarSinistros(int id) {
         //dado um certo id, printa-se as informações do sinsitro que tem esse id"
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
         try {
-            int encontrou = 0;
-            for (int i = 0; i < listaSinistro.size(); i++) {
-                if (listaSinistro.get(i).getId() == id) {
-                    System.out.println(listaSinistro.get(i));
-                    encontrou = 1;
-                    break;
+            for (Sinistro s : listaSinistro) {
+                if (s.getId() == id) {
+                    System.out.println(s);
+                    return true;
                 }
             }
-            if (encontrou == 1) return true;
-            else return false;
+            return false;
         }
         catch (Exception e) { return false; }
     }
+
+    public String returnIdCliente (Cliente c) {
+        //dado um cliente, retorna seu CPF ou seu CNPJ, dependendo do seu tipo.
+        if (c instanceof ClientePF) {
+            return ((ClientePF) c).getCPF().replaceAll("[^0-9]", "");
+        }
+        return ((ClientePJ) c).getCNPJ().replaceAll("[^0-9]", "");
+    } 
 
     @Override
     public String toString() {
