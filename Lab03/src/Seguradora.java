@@ -152,8 +152,8 @@ public class Seguradora {
 
     public boolean removerCliente(Scanner sc) {
         //Remove um determinado cliente da lista de clientes de uma Seguradora
+        //Remove todos os Sinistros associados a este cliente.
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
-        //Os sinistros relacionados ao cliente não são removidos porque a lista de sinistros é pensada como um registro de sinistros.
         try {
             Cliente cliente = buscarCliente(sc);
             if (cliente == null) return false;
@@ -164,7 +164,10 @@ public class Seguradora {
                 listaClientesPJ.remove(listaClientesPJ.indexOf(cliente)); 
             }
             listaClientes.remove(listaClientes.indexOf(cliente)); //remover da lista geral de todos os clientes
-        return true;
+            for (Sinistro s : listaSinistro) { //remover todos os sinistros associados ao cliente
+                if (s.getCliente() == cliente) listaSinistro.remove(s);
+            }
+            return true;
         }
         catch (Exception e) { return false; }
     }
