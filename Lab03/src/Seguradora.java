@@ -7,7 +7,7 @@ public class Seguradora {
     private ArrayList<Cliente> listaClientes; //lista de todos os clientes da seguradora
     private ArrayList<ClientePF> listaClientesPF; //lista dos clientes do tipo PF (Pessoa Física)
     private ArrayList<ClientePJ> listaClientesPJ; //lista dos clientes do tipo PJ (Pessoa Jurídica)
-    private static ArrayList<Sinistro> listaSinistro; //lista com todos os sinistros da seguradora;
+    private ArrayList<Sinistro> listaSinistro; //lista com todos os sinistros da seguradora;
 
     //Construtor da Seguradora
     public Seguradora (String nome, String telefone, String email, String endereco) {
