@@ -353,7 +353,11 @@ public class Seguradora {
     public boolean transferirSeguro (Cliente cIni, Cliente cFinal) {
         //Transfere o seguro do cliente cIni para cFinal
         try {
-            cFinal.getListaVeiculos().addAll(cIni.getListaVeiculos());
+            cFinal.getListaVeiculos().addAll(cIni.getListaVeiculos()); //adicionar os veiculos de cIni aos de cFinal
+            cIni.getListaVeiculos().clear(); //remover os veiculos de cIni
+            //atualizar o valor dos seguros
+            calcularPrecoSeguroCliente(cIni);
+            calcularPrecoSeguroCliente(cFinal);
             return true;
         } catch (Exception e) { return false; }
     }

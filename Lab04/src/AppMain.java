@@ -6,6 +6,7 @@ public class AppMain {
      * Esses métodos são acessados por meio de um Menu interativo baseado em uma Seguradora, que é criada por um método nesta classe Main.
      * Do modo como foi impletado, é possível lidar com várias seguradoras e alterar do menu de uma Seguradora para outra.
      */
+    //TERMINAR TRANSFERIR SEGURO
     public static Seguradora criarSeguradora(Scanner sc) {
         //Recebe as informações necessárias e cria um objeto da classe Seguradora.
         print("Insira o nome da seguradora: ");
@@ -51,12 +52,13 @@ public class AppMain {
             print("3) Consultar dados da seguradora");
             print("4) Cadastro de uma nova seguradora");
             print("5) Alterar para outra seguradora");
-            print("6) Calcular a receita da Seguradora");
-            print("7) Fechar Menu");
+            print("6) Calcular a receita da seguradora");
+            print("7) Transferência de seguro");
+            print("8) Fechar Menu");
             print("=============================================");
             print("Entre com um número: ");
             input = Integer.parseInt(sc.nextLine());
-            if (input == 7) break;
+            if (input == 8) break;
             op = getOperacaoByInput(input);
 
             switch (op) {
@@ -74,8 +76,8 @@ public class AppMain {
                     print("8) Retornar ao menu principal");
                     print("==========================");
                     print("Entre com um número: ");
-                    input_cliente = Integer.parseInt(sc.nextLine()) + 6;
-                    if (input_cliente == 14) break;
+                    input_cliente = Integer.parseInt(sc.nextLine()) + 7;
+                    if (input_cliente == 15) break;
                     op_cliente = getOperacaoByInput(input_cliente);
 
                     switch (op_cliente) {
@@ -117,8 +119,8 @@ public class AppMain {
                             print("3) Retornar ao Menu de Clientes");
                             print("=========================");
                             print("Entre com um número: ");
-                            input_veiculo = Integer.parseInt(sc.nextLine()) + 13;
-                            if (input_veiculo == 16) break;
+                            input_veiculo = Integer.parseInt(sc.nextLine()) + 14;
+                            if (input_veiculo == 17) break;
                             op_veiculo = getOperacaoByInput(input_veiculo);
 
                             switch (op_veiculo) {
@@ -198,8 +200,8 @@ public class AppMain {
                     print("5) Retornar ao menu principal");
                     print("==========================");
                     print("Entre com um número: ");
-                    input_sinistro = Integer.parseInt(sc.nextLine()) + 15;
-                    if (input_sinistro == 20) break;
+                    input_sinistro = Integer.parseInt(sc.nextLine()) + 16;
+                    if (input_sinistro == 21) break;
                     op_sinistro = getOperacaoByInput(input_sinistro);
 
                     switch (op_sinistro) {
@@ -299,6 +301,22 @@ public class AppMain {
                     print("=======================================");
                     break;
 
+                case TRANSF_SEGURO:
+                    print("===== TRANSFERÊNCIA DE SEGURO =====");
+                    print("Insira os dados referentes ao cliente de origem:");
+                    Cliente cIni = seguradoraAtual.buscarCliente(sc);
+                    print("=================================================");
+                    print("Insira os dados referentes ao cliente final (que irá receber o seguro):");
+                    Cliente cFinal = seguradoraAtual.buscarCliente(sc);
+                    print("=================================================");
+                    check = seguradoraAtual.transferirSeguro(cIni, cFinal);
+                    if (check) {
+                        print("Seguro transferido com sucesso!");
+                    }
+                    else {
+                        print("Ocorreu um erro ao tentar realizar a transferência. Tente novamente.");
+                    }
+                    break;
                 default:
                     print("==============================================");
                     print("Selecione apenas entre as opções apresentadas!");
