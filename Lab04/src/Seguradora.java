@@ -210,17 +210,7 @@ public class Seguradora {
             //Data
             System.out.println("\nInsira a data do Sinistro (Formato dd-MM-yyyy): ");
             String d = sc.nextLine();
-            while (true) {
-                try {
-                    data = formatter.parse(d);
-                    d = sc.nextLine();
-                    break;
-                } catch (Exception e) {
-                    System.out.println("==========================================");
-                    System.out.println("Formato de data inválido! Tente novamente.");
-                    System.out.println("==========================================");
-                }
-            }
+            data = Validacao.validaFormatoDate(sc, d, formatter);
             //Endereço
             System.out.println("Insira o endereço do sinistro: ");
             String endereco_sinistro = sc.nextLine();
@@ -396,6 +386,12 @@ public class Seguradora {
     public boolean listarVeiculoCliente (Scanner sc) {
         Cliente c = buscarCliente(sc);
         if (c == null) return false;
+        if (c.getListaVeiculos().size() == 0) {
+            System.out.println("=======================================");
+            System.out.println("Não há veículo cadastrado neste cliente");
+            System.out.println("=======================================");
+            return false;
+        }
         for (Veiculo v : c.getListaVeiculos()) {
             System.out.println(v);
         }

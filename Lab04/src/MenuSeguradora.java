@@ -166,8 +166,7 @@ public class MenuSeguradora {
                                     print("============================================================");
                                     print("Abaixo insira as informações do cliente (dono dos veículos)!");
                                     print("============================================================");
-                                    check = seguradoraAtual.listarVeiculoCliente(sc);
-                                    print("============================================================");
+                                    seguradoraAtual.listarVeiculoCliente(sc);
                                     break;
                                 case LISTAR_VEICULO_SEGURADORA:
                                     
@@ -344,6 +343,7 @@ public class MenuSeguradora {
                         print("Insira os dados referentes ao cliente final (que irá receber o seguro):");
                         Cliente cFinal = seguradoraAtual.buscarCliente(sc);
                         check = seguradoraAtual.transferirSeguro(cIni, cFinal);
+                        print("=================================================");
                         if (check) {
                             print("Seguro transferido com sucesso!");
                         }
@@ -353,6 +353,7 @@ public class MenuSeguradora {
                     } else {
                         print("Ocorreu um erro e a transferência não foi realizada.");
                     }
+                    print("=================================================");
                     break;
                 default:
                     print("==============================================");
