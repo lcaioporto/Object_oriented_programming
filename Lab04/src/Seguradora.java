@@ -1,5 +1,7 @@
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.ArrayList;
 public class Seguradora {
     private String nome;
     private String telefone;
@@ -55,6 +57,10 @@ public class Seguradora {
         return listaClientes;
     }
 
+    public ArrayList<Sinistro> getListaSinistro () {
+        return listaSinistro;
+    }
+
     public boolean cadastrarCliente(Scanner sc) {
         //Realiza todo o cadastro de um cliente, seja ele PF ou PJ, recebendo inputs de todas as informações necessárias
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
@@ -64,8 +70,7 @@ public class Seguradora {
             String nome_cliente = sc.nextLine();
             while (! Validacao.validaNome(nome_cliente)) {
                 System.out.println("===========================================================");
-                System.out.println("Nome inválido! O nome do cliente deve conter apenas letras!");
-                System.out.println("Tente novamente!");
+                System.out.println("Nome inválido! \nO nome do cliente deve conter apenas letras! \nTente novamente.");
                 System.out.println("===========================================================");
                 System.out.println("Insira o nome do cliente: ");
                 nome_cliente = sc.nextLine();
@@ -80,20 +85,12 @@ public class Seguradora {
                 //Inicializando a data
                 Date dataFundacao;
                 //Data de fundação
-                System.out.println("\nInsira a data de nascimento (Formato dd-MM-yyyy): ");
+                System.out.println("\nInsira a data de fundação (Formato dd-MM-yyyy): ");
                 String d = sc.nextLine();
-                try {
-                    dataFundacao = formatter.parse(d);
-                } catch (Exception e) {
-                    System.out.println("==========================================");
-                    System.out.println("Formato de data inválido! Tente novamente.");
-                    System.out.println("==========================================");
-                    return cadastrarCliente(sc);
-                }
+                dataFundacao = Validacao.validaFormatoDate(sc, d, formatter);
                 //CNPJ
                 System.out.println("\nInsira o CNPJ do cliente: ");
                 String CNPJ = sc.nextLine();
-                
                 //Validação do CNPJ
                 while (! Validacao.validarCNPJ(CNPJ)) {
                     System.out.println("===============================");
@@ -106,7 +103,17 @@ public class Seguradora {
                 System.out.println("CNPJ válido!");
                 //Quantidade de Funcionários
                 System.out.println("\nInsira a quantidade de funcionários da empresa: ");
-                int qntdeFuncionarios = Integer.parseInt(sc.nextLine());
+                int qntdeFuncionarios = 0;
+                while (true) {
+                    try {
+                        qntdeFuncionarios = Integer.parseInt(sc.nextLine());
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("============================");
+                        System.out.println("Responda apenas com números!");
+                        System.out.println("============================");
+                    }
+                }
                 //Criar objeto ClientePJ
                 ClientePJ c = new ClientePJ(nome_cliente, endereco_cliente, CNPJ, dataFundacao, qntdeFuncionarios);
                 listaClientes.add(c);
@@ -127,22 +134,22 @@ public class Seguradora {
                 //DATA NASCIMENTO
                 System.out.println("\nInsira a data de nascimento (Formato dd-MM-yyyy): ");
                 String d = sc.nextLine();
-                try {
-                    dataNascimento = formatter.parse(d);
-                } catch (Exception e) {
-                    System.out.println("==========================================");
-                    System.out.println("Formato de data inválido! Tente novamente.");
-                    System.out.println("==========================================");
+                dataNascimento = Validacao.validaFormatoDate(sc, d, formatter);
+                while (! Validacao.validaDataNascimento(dataNascimento)) { 
+                    //verifica se o cliente tem mais de 18 anos
+                    System.out.println("==================================================");
+                    System.out.println("Data inválida! O cliente deve ter mais de 18 anos.");
+                    System.out.println("==================================================");
                     return cadastrarCliente(sc);
                 }
                 //DATA LICENCA
                 System.out.println("\nInsira a data de expedição da lincença (Formato dd-MM-yyyy): ");
                 d = sc.nextLine();
-                try { 
-                    dataLicenca = formatter.parse(d);
-                } catch (Exception e) {
+                dataLicenca = Validacao.validaFormatoDate(sc, d, formatter);
+                while (! Validacao.validaDataLinceca(dataNascimento, dataLicenca)) {
+                    //avalia se a data de lincença dada ocorreu depois da data de nascimento
                     System.out.println("==========================================");
-                    System.out.println("Formato de data inválido! Tente novamente.");
+                    System.out.println("Data inválida! Tente novamente.");
                     System.out.println("==========================================");
                     return cadastrarCliente(sc);
                 }
@@ -190,16 +197,30 @@ public class Seguradora {
         //Recebe todas as informações necessárias para gerar um objeto sinistro.
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
         try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date data;
             //Cliente
             Cliente cliente = buscarCliente(sc);
-            if (cliente == null) { return false; } //cliente não encontrado
+            if (cliente == null) { 
+                return false; 
+            } //cliente não encontrado
             //Veículo
-            System.out.println("\n");
-            Veiculo veiculo = buscaVeiculo(sc, cliente);
+            Veiculo veiculo = buscarVeiculo(sc, cliente);
             if (veiculo == null) { return false; } //veiculo não encontrado
             //Data
-            System.out.println("\nInsira a data do Sinistro: ");
-            String data = sc.nextLine();
+            System.out.println("\nInsira a data do Sinistro (Formato dd-MM-yyyy): ");
+            String d = sc.nextLine();
+            while (true) {
+                try {
+                    data = formatter.parse(d);
+                    d = sc.nextLine();
+                    break;
+                } catch (Exception e) {
+                    System.out.println("==========================================");
+                    System.out.println("Formato de data inválido! Tente novamente.");
+                    System.out.println("==========================================");
+                }
+            }
             //Endereço
             System.out.println("Insira o endereço do sinistro: ");
             String endereco_sinistro = sc.nextLine();
@@ -223,7 +244,7 @@ public class Seguradora {
         return true;
     }
 
-    public boolean listarSinistro() {
+    public boolean listarSinistros() {
         //Printa informações de todos os Sinistros da Seguradora
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
         if (listaSinistro.size() == 0) {
@@ -231,6 +252,17 @@ public class Seguradora {
         }
         for (Sinistro s : listaSinistro) {
             System.out.println("\n" + s);
+        }
+        return true;
+    }
+
+    public boolean listarSinistroCliente(Scanner sc) {
+        Cliente c = buscarCliente(sc);
+        if (c == null) return false;
+        for (Sinistro s : listaSinistro) {
+            if (s.getCliente().equals(c)) {
+                System.out.println("\n" + s);
+            }
         }
         return true;
     }
@@ -262,7 +294,7 @@ public class Seguradora {
         catch (Exception e) { return false; }
     }
 
-    public Veiculo buscaVeiculo (Scanner sc, Cliente c) {
+    public Veiculo buscarVeiculo (Scanner sc, Cliente c) {
         //Busca um veículo na lista de veículos de um dado Cliente c, recebendo a informação da placa
         //Usada para gerar um sinistro
         System.out.println("Insira a placa do veículo: ");
@@ -270,11 +302,14 @@ public class Seguradora {
         for (Veiculo v : c.getListaVeiculos()) {
             if (v.getPlaca().equals(palca)) return v;
         }
+        System.out.println("Veículo não encontrado!");
         return null; //caso em que o veículo buscado não existe
     }
 
     public Cliente buscarCliente (Scanner sc) {
         //Recebe inputs e a partir das informações retorna um cliente específico.
+        String aux = "";
+        if (aux.equals("2")) return null;
         System.out.println("Cliente é PF ou PJ?: ");
         String pf_pj = sc.nextLine().toUpperCase();
         String id;
@@ -294,17 +329,21 @@ public class Seguradora {
             return buscarCliente(sc);
         }
         for (Cliente currCliente : listaClientes) {
-            if (returnIdCliente(currCliente).equals(id)) {
+            if (currCliente.getId().equals(id)) {
                 return currCliente;
             }
         }
-        System.out.println("==============================================");
-        System.out.println("O cliente buscado não existe. Tente novamente.");
-        System.out.println("==============================================");
-        return null; //cliente não encontrado
+        System.out.println("==================================================================");
+        System.out.println("O cliente buscado não existe.");
+        System.out.println("Digite 1 caso queira tentar novamente.");
+        System.out.println("Caso contrário, digite 2 (ou qualquer outro dígito distinto de 1).");
+        System.out.println("==================================================================");
+        aux = sc.nextLine();
+        if (aux.equals("1")) return buscarCliente(sc); //cliente não encontrado
+        return null;
     }
 
-    public boolean visualizarSinistros(int id) {
+    public boolean visualizarSinistro(int id) {
         //dado um certo id, printa-se as informações do sinsitro que tem esse id"
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
         try {
@@ -319,19 +358,11 @@ public class Seguradora {
         catch (Exception e) { return false; }
     }
 
-    public String returnIdCliente (Cliente c) {
-        //dado um cliente, retorna seu CPF ou seu CNPJ, dependendo do seu tipo.
-        if (c instanceof ClientePF) {
-            return ((ClientePF) c).getCPF().replaceAll("[^0-9]", "");
-        }
-        return ((ClientePJ) c).getCNPJ().replaceAll("[^0-9]", "");
-    }
-
     public int calcQtdeSinistros (Cliente c) {
         //dado um cliente C, calcula a quantidade de sinistros associado a este cliente
         int n = 0;
         for (Sinistro s : listaSinistro) {
-            if (s.getCliente() == c) n++;
+            if (s.getCliente().equals(c)) n++;
         }
         return n;
     }
@@ -353,13 +384,32 @@ public class Seguradora {
     public boolean transferirSeguro (Cliente cIni, Cliente cFinal) {
         //Transfere o seguro do cliente cIni para cFinal
         try {
-            cFinal.getListaVeiculos().addAll(cIni.getListaVeiculos()); //adicionar os veiculos de cIni aos de cFinal
-            cIni.getListaVeiculos().clear(); //remover os veiculos de cIni
+            cFinal.getListaVeiculos().addAll(cIni.getListaVeiculos()); //adiciona os veiculos de cIni aos de cFinal
+            cIni.getListaVeiculos().clear(); //remove os veiculos de cIni
             //atualizar o valor dos seguros
             calcularPrecoSeguroCliente(cIni);
             calcularPrecoSeguroCliente(cFinal);
             return true;
         } catch (Exception e) { return false; }
+    }
+
+    public boolean listarVeiculoCliente (Scanner sc) {
+        Cliente c = buscarCliente(sc);
+        if (c == null) return false;
+        for (Veiculo v : c.getListaVeiculos()) {
+            System.out.println(v);
+        }
+        return true;
+    }
+
+    public boolean listarVeiculoSeguradora (Scanner sc) {
+        if (listaClientes.size() == 0) return false;
+        for (Cliente c : listaClientes) {
+            for (Veiculo v : c.getListaVeiculos()) {
+                System.out.println(v);
+            }
+        }
+        return true;
     }
 
     @Override

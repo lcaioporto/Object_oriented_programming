@@ -44,7 +44,7 @@ public class Cliente {
 
     @Override
     public String toString () {
-        return "=========CLIENTE=========" + "\nNome: " + nome + "\nEndereco: " + endereco + "\nLista de Veículos: " + listaVeiculos + "\n=========================";
+        return "========= CLIENTE =========" + "\nNome: " + nome + "\nEndereco: " + endereco + "\nLista de Veículos: " + listaVeiculos + "\n=========================";
     }
 
     public boolean cadastrarVeiculo(Scanner sc) {
@@ -52,6 +52,7 @@ public class Cliente {
         //O objeto criado é associado ao cliente, adicionando-o na lista de veiculos.
         //Caso o método funcione adequadamente, retrona true; c.c retorna false.
         try {
+            int anoFabricacao = 0;
             //placa
             System.out.println("\nInsira a placa do veículo: ");
             String placa = sc.nextLine();
@@ -63,7 +64,17 @@ public class Cliente {
             String modelo = sc.nextLine();
             //ano de fabricação
             System.out.println("\nInsira o ano de fabricação do veículo: ");
-            int anoFabricacao = Integer.parseInt(sc.nextLine());
+            while (true) {
+                try {
+                    anoFabricacao = Integer.parseInt(sc.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("==================================================");
+                    System.out.println("O ano de fabricação do veículo deve ser um número!");
+                    System.out.println("Tente novamente.");
+                    System.out.println("==================================================");
+                }
+            }
             //criar objeto veículo
             Veiculo v = new Veiculo(placa, marca, modelo, anoFabricacao);
             listaVeiculos.add(v);
@@ -76,9 +87,9 @@ public class Cliente {
         //Remove um veículo a partir de sua placa
         System.out.println("Insira a placa do veículo: ");
         String palca = sc.nextLine();
-        for (int i = 0; i < listaVeiculos.size(); i++) {
-            if (listaVeiculos.get(i).getPlaca().equals(palca)) {
-                listaVeiculos.remove(i);
+        for (Veiculo v : listaVeiculos) {
+            if (v.getPlaca().equals(palca)) {
+                listaVeiculos.remove(listaVeiculos.indexOf(v));
                 return true;
             }
         }
@@ -87,5 +98,13 @@ public class Cliente {
 
     public double calculaScore() {
         return 0;
+    }
+
+    public String getId () {
+        //retorna seu CPF ou seu CNPJ, dependendo do seu tipo.
+        if (this instanceof ClientePF) {
+            return ((ClientePF) this).getCPF().replaceAll("[^0-9]", "");
+        }
+        return ((ClientePJ) this).getCNPJ().replaceAll("[^0-9]", "");
     }
 }

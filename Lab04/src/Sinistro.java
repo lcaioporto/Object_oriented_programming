@@ -1,8 +1,9 @@
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Date;
 public class Sinistro {
     private final int ID;
-    private String data;
+    private Date data;
     private String endereco;
     private Seguradora seguradora;
     private Veiculo veiculo;
@@ -28,7 +29,7 @@ public class Sinistro {
     }
 
     //Construtor
-    public Sinistro (String data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
+    public Sinistro (Date data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
         this.ID = generateRandomId();
         ArrayList<Integer> listaID = new ArrayList<Integer>();
         listaID.add(this.ID);
@@ -44,11 +45,11 @@ public class Sinistro {
         return ID;
     }
 
-    public String getData () {
+    public Date getData () {
         return data;
     }
 
-    public void setData (String data) {
+    public void setData (Date data) {
         this.data = data;
     }
 
@@ -86,6 +87,6 @@ public class Sinistro {
 
     @Override
     public String toString () {
-        return "-----SINISTRO-----" + "\nID: " + ID + "\nEndereco: " + endereco + "\nData: " + data + "\nSeguradora: " + seguradora.getNome() + "\nVeículo (Placa): " + veiculo.getPlaca() + "\nCliente: " + cliente.getNome() + "\n------------------";
+        return "========SINISTRO========" + "\nID: " + ID + "\nEndereco: " + endereco + "\nData: " + data + "\nSeguradora: " + seguradora.getNome() + "\nVeículo (Placa): " + veiculo.getPlaca() + "\nCliente (Nome): " + cliente.getNome() + "\nCliente (CPF ou CNPJ): " + cliente.getId() + "\n========================";
     }
 }

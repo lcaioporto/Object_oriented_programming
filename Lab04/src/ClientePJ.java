@@ -23,8 +23,9 @@ public class ClientePJ extends Cliente {
         return CNPJ;
     }
 
-    public double CalcScore() {
-        return CalcSeguro.VALOR_BASE.getValue() * (1 + (qtdeFuncionarios)/100) * super.getListaVeiculos().size();
+    public double calculaScore() {
+        double razao = (double) qtdeFuncionarios/100;
+        return CalcSeguro.VALOR_BASE.getValue() * (1 + razao) * super.getListaVeiculos().size();
     }
 
     @Override

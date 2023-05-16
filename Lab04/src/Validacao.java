@@ -1,4 +1,8 @@
+import java.util.Date;
+import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+import java.text.SimpleDateFormat;
 
 public class Validacao {
 
@@ -130,5 +134,79 @@ public class Validacao {
 
     public static boolean validaNome (String nome) {
         return nome.matches("^[a-zA-ZÀ-ę]*$");
+    }
+
+    public static boolean validaDataNascimento (Date data) {
+        //verificar se o cliente tem pelo menos 18 anos.
+        Date now = new Date();
+        long diffInMillies = now.getTime() - data.getTime();
+        if (diffInMillies < 0) {
+            return false; //data inserida é mais nova que a data atual
+        }
+        diffInMillies = Math.abs(diffInMillies);
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        int idade = (int) diff/365;
+        if (idade >= 18) return true;
+        return false;
+    }
+
+    public static boolean validaDataLinceca (Date dataAntes, Date dataDepois) {
+        //retorna true se dataDepois é realmente depois de dataAntes.
+        //retorna false, caso contrário
+        long diffInMillies = dataDepois.getTime() - dataAntes.getTime();
+        if (diffInMillies > 0) return true;
+        return false;
+    }
+
+    public static int validainput (Scanner sc, int min, int max) {
+        //valida o input no menu operações, garatindo que ele é um número, é inteiro, e está entre as opções do menu (entre min e máx).
+        int input;
+        System.out.println("Entre com um número: ");
+        while (true) {
+            try {
+                input = Integer.parseInt(sc.nextLine());
+                break;
+            } catch (Exception e) {
+                System.out.println("======================");
+                System.out.println("Insira apenas números!");
+                System.out.println("======================");
+                System.out.println("Entre com um número: ");
+            }
+        }
+        while ((input > max || input < min)) {
+            System.out.println("==============================================");
+            System.out.println("Selecione apenas entre as opções apresentadas!");
+            System.out.println("==============================================");
+            System.out.println("Entre com um número: ");
+            while (true) {
+                try {
+                    input = Integer.parseInt(sc.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("======================");
+                    System.out.println("Insira apenas números!");
+                    System.out.println("======================");
+                    System.out.println("Entre com um número: ");
+                }
+            }
+        }
+        return input;
+    }
+
+    public static Date validaFormatoDate (Scanner sc, String d, SimpleDateFormat formatter) {
+        Date output;
+        while (true) {
+            try {
+                output = formatter.parse(d);
+                break;
+            } catch (Exception e) {
+                System.out.println("==========================================");
+                System.out.println("Formato de data inválido! Tente novamente.");
+                System.out.println("==========================================");
+                System.out.println("\nInsira a data novamente (Formato dd-MM-yyyy): ");
+                d = sc.nextLine();
+            }
+        }
+        return output;
     }
 }
