@@ -1,0 +1,75 @@
+import java.util.Date;
+
+public class SeguroPF extends Seguro {
+    private Veiculo veiculo;
+    private ClientePF cliente;
+
+    //Construtor
+    public SeguroPF (Date dataInicio, Date dataFim, Seguradora seguradora, Veiculo veiculo, ClientePF cliente) {
+        super(dataInicio, dataFim, seguradora);
+        this.veiculo = veiculo;
+        this.cliente = cliente;
+        super.setValorMensal(calcularValor());
+    }
+    //Getters
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    @Override
+    public ClientePF getCliente() {
+        return cliente;
+    }
+
+    //Setters
+    @Override
+    public void setCliente(Cliente cliente) {
+        if (cliente instanceof ClientePF) {
+            this.cliente = (ClientePF) cliente;
+        } else {
+            System.out.println("O cliente deve ser uma pessoa física (PF)");
+        }
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    //Funções
+    @Override
+    public double calcularValor() {
+        int idade = super.calcIdade(cliente.getDataNascimento());
+        double fator_idade;
+        //FATOR IDADE
+        if (idade >= 18 && idade < 30) fator_idade = CalcValor.FATOR_18_30.getValue();
+        else if (idade < 60) fator_idade = CalcValor.FATOR_30_60.getValue();
+        else fator_idade = CalcValor.FATOR_60_90.getValue();
+        //QUANTIDADE DE VEÍCULOS
+        int quantidadeVeiculos = cliente.getListaVeiculos().size();
+        //QUANTIDADE SINISTROS CLIENTE
+        int quantidadeSinistrosCliente = 0;
+        for(Sinistro s : super.getListaSinistros()) {
+            if (s.getCondutor() == null){ 
+                quantidadeSinistrosCliente++;
+            }
+        }
+        //QUANTIDADE SINISTROS CONDUTOR
+        int quantidadeSinistrosCondutor = 0; 
+        for (Condutor c : super.getListaCondutores()) {
+            quantidadeSinistrosCliente += c.getListaSinistros().size();
+        }
+        //Razões
+        double r1 = (double) 1/(quantidadeVeiculos + 2);
+        double r2 = (double) quantidadeSinistrosCliente/10;
+        double r3 = (double) quantidadeSinistrosCondutor/10;
+        //CALCULAR O VALOR
+        double valor = CalcValor.VALOR_BASE.getValue() * fator_idade * (1 + r1) * (2 + r2) + (5 + r3);
+        super.setValorMensal(valor);
+        return valor;
+    }
+
+    @Override
+    public String toString() {
+        return "======== SEGURO PF ========" + "\nData de início: " + super.getDataInicio() + "\nData do fim: " + super.getDataFim() + "\nSeguradora (nome): " + super.getSeguradora().getNome() + "\nPlaca do veículo: " + veiculo.getPlaca() + "\nMarca do veículo: " + veiculo.getMarca() + "\nNome do cliente: " + cliente.getNome() + "\nCPF do cliente: " + cliente.getCPF() + "===========================";
+    }
+}
