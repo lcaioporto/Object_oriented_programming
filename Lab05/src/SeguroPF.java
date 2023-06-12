@@ -49,14 +49,18 @@ public class SeguroPF extends Seguro {
         //QUANTIDADE SINISTROS CLIENTE
         int quantidadeSinistrosCliente = 0;
         for(Sinistro s : super.getListaSinistros()) {
-            if (s.getCondutor() == null){ 
+            if (s.getCondutor() == null) { 
                 quantidadeSinistrosCliente++;
             }
         }
         //QUANTIDADE SINISTROS CONDUTOR
         int quantidadeSinistrosCondutor = 0; 
         for (Condutor c : super.getListaCondutores()) {
-            quantidadeSinistrosCliente += c.getListaSinistros().size();
+            for (Sinistro sinistro : c.getListaSinistros()) {
+                if (sinistro.getSeguro().equals(this)) {
+                    quantidadeSinistrosCondutor++;
+                }
+            }
         }
         //Razões
         double r1 = (double) 1/(quantidadeVeiculos + 2);

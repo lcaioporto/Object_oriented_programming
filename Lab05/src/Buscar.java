@@ -54,7 +54,7 @@ public class Buscar {
         System.out.println("\nInsira o CPF do condutor: ");
         String cpf = sc.nextLine().replaceAll("[^0-9]", "");
         for (Condutor currCondutor : listaCondutores) {
-            if (currCondutor.getCPF().equals(cpf)) {
+            if (currCondutor.getCPF().equals(cpf.replaceAll("[^0-9]", ""))) {
                 return currCondutor;
             }
         }

@@ -10,7 +10,7 @@ public abstract class Seguro {
     private Date dataInicio;
     private Date dataFim;
     private Seguradora seguradora;
-    private ArrayList<Sinistro> listaSinistros; //contém apenas sinsitros do cliente do seguro
+    private ArrayList<Sinistro> listaSinistros; //contém apenas sinsitros do cliente (titular) do seguro
     private ArrayList<Condutor> listaCondutores;
     private double valorMensal;
     private static ArrayList<Integer> listaID;
@@ -171,11 +171,11 @@ public abstract class Seguro {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             Date data;
             //Data
-            System.out.println("\nInsira a data do Sinistro (Formato dd-MM-yyyy): ");
+            System.out.println("Insira a data do Sinistro (Formato dd-MM-yyyy): ");
             String d = sc.nextLine();
             data = Validacao.validaFormatoDate(sc, d, formatter);
             //Endereço
-            System.out.println("Insira o endereço do sinistro: ");
+            System.out.println("\nInsira o endereço do sinistro: ");
             String endereco_sinistro = sc.nextLine();
             //Condutor
             Condutor condutor = null;
@@ -191,7 +191,7 @@ public abstract class Seguro {
                     getListaSinistros().add(s);
                 }
                 else  if (yN.equals("n")) {
-                    System.out.println("Então vamos buscar informações sobre o condutor relacionado ao sinistro.");
+                    System.out.println("Então vamos buscar informações sobre o condutor.");
                     condutor = Buscar.buscaCondutor(sc, getListaCondutores());
                     ok = true;
                     //objeto Sinistro

@@ -342,23 +342,16 @@ public class Seguradora {
         System.out.println("Qual a data de início do seguro (Formato dd-MM-yyyy)?");
         String d = sc.nextLine();
         Date dataInicio = Validacao.validaFormatoDate(sc, d, formatter);
-        while (! Validacao.validaDataNascimento(dataInicio)) { 
-            //verifica se o cliente tem mais de 18 anos
-            System.out.println("==================================================");
-            System.out.println("Data inválida! O cliente deve ter mais de 18 anos.");
-            System.out.println("==================================================");
-            return cadastrarCliente(sc);
-        }
         //DATA FIM
-        System.out.println("Qual a data de fim do seguro (Formato dd-MM-yyyy)?");
+        System.out.println("\nQual a data de fim do seguro (Formato dd-MM-yyyy)?");
         d = sc.nextLine();
         Date dataFim = Validacao.validaFormatoDate(sc, d, formatter);
-        while (! Validacao.validaDataNascimento(dataFim)) { 
-            //verifica se o cliente tem mais de 18 anos
-            System.out.println("==================================================");
-            System.out.println("Data inválida! O cliente deve ter mais de 18 anos.");
-            System.out.println("==================================================");
-            return cadastrarCliente(sc);
+        while (!Validacao.validaDataLinceca(dataInicio, dataFim)) {
+            System.out.println("A data final deve ser após a data de início!");
+            System.out.println("Tente novamente...");
+            System.out.println("Qual a data de fim do seguro (Formato dd-MM-yyyy)?");
+            d = sc.nextLine();
+            dataFim = Validacao.validaFormatoDate(sc, d, formatter);
         }
         //SEGURADORA
         Seguradora seguradora = this;
@@ -366,6 +359,7 @@ public class Seguradora {
         System.out.println("\nInsira informações sobre o titular do seguro.");
         Cliente cliente = Buscar.buscarCliente(sc, listaClientes);
         if (cliente == null) return false;
+        System.out.print("\n");
         //SEGURO PF
         if (cliente instanceof ClientePF) {
             Veiculo veiculo = Buscar.buscarVeiculo(sc, ((ClientePF) cliente).getListaVeiculos());
@@ -392,7 +386,7 @@ public class Seguradora {
         return listaSegurosCliente;
     }
 
-    public boolean removerSeguro (Scanner sc) {
+    public boolean cancelarSeguro (Scanner sc) {
         Seguro seguro = Buscar.buscarSeguro(sc, listaSeguros);
         if (seguro == null) return false;
         listaSeguros.remove(seguro);

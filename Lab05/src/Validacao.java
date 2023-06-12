@@ -211,6 +211,7 @@ public class Validacao {
     }
 
     public static boolean isNull (Object o) {
+        //Se verificar se o Objeto é null, printa que ele não existe
         if (o == null) {
             System.out.println("=============================");
             System.out.println("O item buscado não existe!");

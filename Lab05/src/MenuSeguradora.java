@@ -66,14 +66,14 @@ public class MenuSeguradora {
             print("=== MENU DA SEGURADORA '" + seguradoraAtual.getNome() + "' ===");
             print("=============================================");
             print("Com o que deseja-se lidar?");
-            print("1) Clientes"); //OK
-            print("2) Seguro"); //OK
-            print("3) Consultar dados da seguradora"); //OK
-            print("4) Calcular a receita da seguradora"); //OK
-            print("5) Transferência de seguro"); //OK
-            print("6) Cadastro de uma nova seguradora"); //OK
-            print("7) Alterar para outra seguradora"); //OK
-            print("8) Fechar Menu"); //OK
+            print("1) Clientes");
+            print("2) Seguro");
+            print("3) Consultar dados da seguradora");
+            print("4) Calcular a receita da seguradora");
+            print("5) Transferência de seguro");
+            print("6) Cadastro de uma nova seguradora");
+            print("7) Alterar para outra seguradora");
+            print("8) Fechar Menu");
             print("=============================================");
             input = Validacao.validainput(sc, 1, 8);
             if (input == 8) break;
@@ -84,13 +84,13 @@ public class MenuSeguradora {
                     while (true) {
                         print("===== CLIENTES =====");
                         print("O que você deseja fazer?");
-                        print("1) Cadastrar um novo cliente"); //OK
-                        print("2) Remover um cliente"); //OK
-                        print("3) Listar todos os clientes da seguradora"); //OK
-                        print("4) Acessar dados de um determinado cliente"); //OK
-                        print("5) Lidar com veículos (SOMENTE para pessoa física - PF)"); //OK
+                        print("1) Cadastrar um novo cliente");
+                        print("2) Remover um cliente");
+                        print("3) Listar todos os clientes da seguradora");
+                        print("4) Acessar dados de um determinado cliente");
+                        print("5) Lidar com veículos (SOMENTE para pessoa física - PF)");
                         print("6) Lidar com frotas (SOMENTE para pessoa jurídica - PJ)");
-                        print("7) Calcular o preço do seguro de determinado cliente"); //OK
+                        print("7) Calcular o preço do seguro de determinado cliente");
                         print("8) Retornar ao menu principal");
                         print("==========================");
                         input_cliente = Validacao.validainput(sc, 1, 8) + 7;
@@ -129,13 +129,13 @@ public class MenuSeguradora {
                             
                             case MENU_VEICULOS: //Menu Veículos
                                 while (true) {
-                                    print("======= VEÍCULOS ======="); //OK
+                                    print("======= VEÍCULOS =======");
                                     print("O que você deseja fazer?");
-                                    print("1) Cadastrar um novo veículo"); //OK
-                                    print("2) Remover um veículo"); //OK
-                                    print("3) Listar veículos de um cliente"); //OK
-                                    print("4) Listar veículos da seguradora"); //OK
-                                    print("5) Retornar ao Menu de Clientes"); //OK
+                                    print("1) Cadastrar um novo veículo");
+                                    print("2) Remover um veículo");
+                                    print("3) Listar veículos de um cliente");
+                                    print("4) Listar veículos da seguradora");
+                                    print("5) Retornar ao Menu de Clientes");
                                     print("=========================");
                                     input_veiculo = Validacao.validainput(sc, 1, 5) + 14;
                                     if (input_veiculo == 19) break;
@@ -275,7 +275,7 @@ public class MenuSeguradora {
                                             if (Validacao.isNull(cliente)) {
                                                 break;
                                             }
-                                            check = ((ClientePJ) cliente).atualizarFrota(sc, 3);
+                                            check = ((ClientePJ) cliente).atualizarFrota(sc, ClientePJ.REMOVER_FROTA);
                                             print("==========================");
                                             if (check) { 
                                                 print("Frota removida com sucesso!");
@@ -294,7 +294,7 @@ public class MenuSeguradora {
                                             if (Validacao.isNull(cliente)) {
                                                 break;
                                             }
-                                            check = ((ClientePJ) cliente).atualizarFrota(sc, 2);
+                                            check = ((ClientePJ) cliente).atualizarFrota(sc, ClientePJ.REMOVER_VEICULOS_FROTA);
                                             print("==========================");
                                             if (check) { 
                                                 print("Veículo removido com sucesso!");
@@ -313,7 +313,7 @@ public class MenuSeguradora {
                                             if (Validacao.isNull(cliente)) {
                                                 break;
                                             }
-                                            check = ((ClientePJ) cliente).atualizarFrota(sc, 1);
+                                            check = ((ClientePJ) cliente).atualizarFrota(sc, ClientePJ.ADICIONAR_VEICULOS_FROTA);
                                             print("==========================");
                                             if (check) { 
                                                 print("Veículo adicionado com sucesso!");
@@ -357,7 +357,7 @@ public class MenuSeguradora {
                                 }
                                 if (valor != 0) {
                                     print("======================================");
-                                    print("Valor do seguro: " + valor + " reais.");
+                                    print("Valor do seguro: " + String.format("%.2f", valor).replace(",", ".") + " reais.");
                                     print("======================================");
                                 } else {
                                     print("Não há nenhum seguro associado a este cliente.");
@@ -402,7 +402,7 @@ public class MenuSeguradora {
                                 break;
                             case CANCELAR_SEGURO:
                                 print("===== Remover um seguro =====");
-                                check = seguradoraAtual.removerSeguro(sc);
+                                check = seguradoraAtual.cancelarSeguro(sc);
                                 print("========================================");
                                 if (!check) {
                                     print("O seguro buscado não existe. Tente novamente.");
@@ -443,7 +443,7 @@ public class MenuSeguradora {
                                 break;
                             case MENU_SINISTRO:
                                 while (true) {
-                                    print("====== SINISTRO ======"); //OK
+                                    print("====== SINISTRO ======");
                                     print("O que você deseja fazer?");
                                     print("1) Gerar um novo sinistro");
                                     print("2) Listar todos os sinistros de um seguro");
@@ -657,7 +657,7 @@ public class MenuSeguradora {
                 
                 case CALC_RECEITA:
                     print("======== RECEITA DA SEGURADORA ========");
-                    print("Valor da receita: " + seguradoraAtual.calcularReceita() + " reais.");
+                    print("Valor da receita: " + String.format("%.2f", seguradoraAtual.calcularReceita()).replace(",", ".") + " reais.");
                     print("=======================================");
                     break;
 

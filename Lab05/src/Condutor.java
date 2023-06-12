@@ -99,6 +99,6 @@ public class Condutor {
 
     @Override
     public String toString() {
-        return "======== CONDUTOR ========" + "\nCPF: " + CPF + "\nNome: " + nome + "\nTelefone: " + telefone + "\nEndereço: " + endereco + "\nE-mail: " + email + "\nData de nascimento: " + dataNascimento + "==========================";
+        return "======== CONDUTOR ========" + "\nCPF: " + this.CPF + "\nNome: " + this.nome + "\nTelefone: " + this.telefone + "\nEndereço: " + this.endereco + "\nE-mail: " + this.email + "\nData de nascimento: " + this.dataNascimento + "\n==========================";
     }
 }

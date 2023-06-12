@@ -6,6 +6,10 @@ public class ClientePJ extends Cliente {
     private final String CNPJ;
     private Date dataFundacao;
     private ArrayList<Frota> listaFrota;
+    //valores para utilização do método atualizarFrota.
+    public static int ADICIONAR_VEICULOS_FROTA = 1;
+    public static int REMOVER_VEICULOS_FROTA = 2;
+    public static int REMOVER_FROTA = 3;
 
     public ClientePJ(String nome, String endereco, String telefone, String email, String CNPJ, Date dataFundacao) {
         super(nome, endereco, telefone, email);
@@ -33,7 +37,7 @@ public class ClientePJ extends Cliente {
     }
 
     //Métodos
-    public void adicionarVeiculosFrota (Scanner sc, Frota frota) {
+    private void adicionarVeiculosFrota (Scanner sc, Frota frota) {
         String input = "";
         System.out.println("Entre com os veículos da Frota.");
         do {
@@ -54,7 +58,7 @@ public class ClientePJ extends Cliente {
         } while (!input.equals("2"));
     }
 
-    public void removerVeiculosFrota (Scanner sc, Frota frota) {
+    private void removerVeiculosFrota (Scanner sc, Frota frota) {
         String input = "";
         System.out.println("Entre com os veículos da Frota.");
         do {
@@ -112,7 +116,10 @@ public class ClientePJ extends Cliente {
     public boolean getVeiculosPorFrota (Scanner sc) {
         try {
             Frota frota = Buscar.buscarFrota(sc, listaFrota);
-            System.out.println(frota.getListaVeiculos());
+            System.out.println("===== LISTA DE VEÍCULOS DA FROTA " + frota.getCode() + " =====");
+            for (Veiculo veiculo : frota.getListaVeiculos()) {
+                System.out.println(veiculo);
+            }
             return true;
         } catch (Exception e) {
             return false;

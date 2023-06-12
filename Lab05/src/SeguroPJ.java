@@ -55,7 +55,11 @@ public class SeguroPJ extends Seguro {
         //QUANTIDADE SINISTROS CONDUTOR
         int quantidadeSinistrosCondutor = 0; 
         for (Condutor c : super.getListaCondutores()) {
-            quantidadeSinistrosCondutor += c.getListaSinistros().size();
+            for (Sinistro sinistro : c.getListaSinistros()) {
+                if (sinistro.getSeguro().equals(this)) {
+                    quantidadeSinistrosCondutor++;
+                }
+            }
         }
         //Razões
         double r1 = (double) quantidadeFuncionarios/10;
@@ -71,6 +75,6 @@ public class SeguroPJ extends Seguro {
 
     @Override
     public String toString() {
-        return "======== SEGURO PJ ========" + "\nData de início: " + super.getDataInicio() + "\nData do fim: " + super.getDataFim() + "\nSeguradora (nome): " + super.getSeguradora().getNome() + "\nFrota: " + frota.getCode() + "\nNome do cliente: " + cliente.getNome() + "\nCNPJ do cliente: " + cliente.getCNPJ() + "===========================";
+        return "======== SEGURO PJ ========" + "\nData de início: " + super.getDataInicio() + "\nData do fim: " + super.getDataFim() + "\nSeguradora (nome): " + super.getSeguradora().getNome() + "\nFrota: " + frota.getCode() + "\nNome do cliente: " + cliente.getNome() + "\nCNPJ do cliente: " + cliente.getCNPJ() + "\n===========================";
     }
 }
