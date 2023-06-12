@@ -81,6 +81,6 @@ public class Frota {
 
     @Override
     public String toString() {
-        return "========== FROTA ==========" + "\nCode: " + this.code + "\nLista de veículos: " + this.listaVeiculos + "\n===========================";
+        return "========== FROTA ==========" + "\nCode: " + this.code + "\nLista de veículos: " + this.listaVeiculos + "\n===========================\n";
     }
 }

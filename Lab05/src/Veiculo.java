@@ -47,7 +47,7 @@ public class Veiculo {
 
     @Override
     public String toString () {
-        String s = "\n===== VEÍCULO =====" + "\nPlaca: " + placa + "\nMarca: " + marca + "\nModelo: " + modelo + "\nAno de Fabricação: " + anoFabricacao + "\n===================";
+        String s = "\n===== VEÍCULO =====" + "\nPlaca: " + placa + "\nMarca: " + marca + "\nModelo: " + modelo + "\nAno de Fabricação: " + anoFabricacao + "\n===================\n";
         return s;
     }
 }

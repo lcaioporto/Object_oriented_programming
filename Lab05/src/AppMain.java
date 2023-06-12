@@ -46,6 +46,12 @@ public class AppMain {
         seguroPF.getListaCondutores().add(condutor1);
         seguroPF.getListaCondutores().add(condutor2);
         seguroPJ.getListaCondutores().add(condutor2);
+        //Testes toString() - parte 1
+        System.out.println(clientePF);
+        System.out.println(clientePJ);
+        System.out.println(condutor1);
+        System.out.println(frota);
+        System.out.println(seguroPF);
         //Utilizando gerarSeguro() da seguradora (recebe inputs do usuário)
         Scanner sc = new Scanner(System.in);
         System.out.println("===== CADASTRO DE UM SEGURO =====\n");
@@ -76,7 +82,7 @@ public class AppMain {
         //Pode-se desautorizar um condutor usando o método abaixo
         System.out.println("\n===== DESAUTORIZAR UM CONDUTOR =====\n");
         seguroPF.desautorizarCondutor(sc);
-        //Teste toString()
+        //Teste toString() - parte 2.
         System.out.println(clientePF);
         System.out.println(clientePJ);
         System.out.println(condutor1);
@@ -87,7 +93,7 @@ public class AppMain {
         System.out.println(sinistro);
         sc.close();
         //Menu da Seguradora
-        System.out.println("====================================================");
+        System.out.println("========================================================");
         MenuSeguradora.MenuInterativo();
     }
 }

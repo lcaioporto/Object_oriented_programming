@@ -3,8 +3,6 @@ public abstract class Cliente {
     private String endereco;
     private String telefone;
     private String email;
-    //private ArrayList<Veiculo> listaVeiculos; //contém todos os veículos de um certo cliente
-    //private double valorSeguro;
 
     //Construtor
     public Cliente (String nome, String endereco, String telefone, String email) {
@@ -45,6 +43,6 @@ public abstract class Cliente {
 
     @Override
     public String toString () {
-        return "========= CLIENTE =========" + "\nNome: " + this.nome + "\nEndereco: " + this.endereco + "\nTelefone: " + this.telefone + "\nEmail: " + this.email + "\n=========================";
+        return "========= CLIENTE =========" + "\nNome: " + this.nome + "\nEndereco: " + this.endereco + "\nTelefone: " + this.telefone + "\nEmail: " + this.email;
     }
 }

@@ -218,4 +218,9 @@ public abstract class Seguro {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "======== SEGURO ========" + "\nData de início: " + this.getDataInicio() + "\nData do fim: " + this.getDataFim() + "\nNome da seguradora: " + this.getSeguradora().getNome() + "\nID do seguro: " + this.getID();
+    }
 }

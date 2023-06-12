@@ -128,6 +128,6 @@ public class ClientePJ extends Cliente {
 
     @Override
     public String toString () {
-        return "=========CLIENTE=========" + "\nNome: " + super.getNome() + "\nEndereco: " + super.getEndereco() + "\nCNPJ: " + CNPJ + "\nData de Fundação: " + dataFundacao + "\n=========================";
+        return super.toString() + "\nCNPJ: " + this.CNPJ + "\nData de Fundação: " + this.dataFundacao + "\n=========================\n";
     }
 }

@@ -74,6 +74,6 @@ public class SeguroPF extends Seguro {
 
     @Override
     public String toString() {
-        return "======== SEGURO PF ========" + "\nData de início: " + super.getDataInicio() + "\nData do fim: " + super.getDataFim() + "\nSeguradora (nome): " + super.getSeguradora().getNome() + "\nPlaca do veículo: " + veiculo.getPlaca() + "\nMarca do veículo: " + veiculo.getMarca() + "\nNome do cliente: " + cliente.getNome() + "\nCPF do cliente: " + cliente.getCPF() + "===========================";
+        return super.toString()+ "\nValor mensal: " + this.getValorMensal() + "\nPlaca do veículo: " + veiculo.getPlaca() + "\nMarca do veículo: " + veiculo.getMarca() + "\nNome do cliente: " + cliente.getNome() + "\nCPF do cliente: " + cliente.getCPF() + "\n===========================\n";
     }
 }

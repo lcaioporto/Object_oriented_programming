@@ -107,6 +107,6 @@ public class ClientePF extends Cliente {
     }
     @Override
     public String toString () {
-        return super.toString() + "\nEducação: " + getEducacao() + "\nGênero: " + getGenero() + "\nLista de Veículos: " + getListaVeiculos() + "\nCPF: " + getCPF() + "\nData de Nascimento: " + getDataNascimento() + "\n=========================";
+        return super.toString() + "\nEducação: " + getEducacao() + "\nGênero: " + getGenero() + "\nLista de Veículos: " + getListaVeiculos() + "\nCPF: " + getCPF() + "\nData de Nascimento: " + getDataNascimento() + "\n=========================\n";
     }
 }

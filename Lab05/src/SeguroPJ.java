@@ -75,6 +75,6 @@ public class SeguroPJ extends Seguro {
 
     @Override
     public String toString() {
-        return "======== SEGURO PJ ========" + "\nData de início: " + super.getDataInicio() + "\nData do fim: " + super.getDataFim() + "\nSeguradora (nome): " + super.getSeguradora().getNome() + "\nFrota: " + frota.getCode() + "\nNome do cliente: " + cliente.getNome() + "\nCNPJ do cliente: " + cliente.getCNPJ() + "\n===========================";
+        return super.toString() + "\nValor mensal: " + this.getValorMensal() + "\nFrota: " + frota.getCode() + "\nNome do cliente: " + cliente.getNome() + "\nCNPJ do cliente: " + cliente.getCNPJ() + "\n===========================\n";
     }
 }

@@ -74,6 +74,6 @@ public class Sinistro {
 
     @Override
     public String toString () {
-        return "========SINISTRO========" + "\nID: " + ID + "\nEndereco: " + endereco + "\nData: " + data + "\nSeguro (ID): " + seguro.getID() + "\nCondutor (Nome): " + condutor.getNome() + "\nCondutor (CPF): " + condutor.getCPF() + "\n========================";
+        return "========SINISTRO========" + "\nID: " + this.ID + "\nEndereco: " + this.endereco + "\nData: " + this.data + "\nSeguro (ID): " + seguro.getID() + "\nCondutor (Nome): " + condutor.getNome() + "\nCondutor (CPF): " + condutor.getCPF() + "\n========================\n";
     }
 }

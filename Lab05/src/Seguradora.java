@@ -395,6 +395,6 @@ public class Seguradora {
 
     @Override
     public String toString() {
-        return "======== DADOS SEGURADORA ========\n" + "Nome: " + getNome() + "\nEmail: " + getEmail() + "\nEndereço: " + getEndereco() + "\nTelefone: " + getTelefone() + "\nCNPJ: " + getCNPJ() + "\n==================================";
+        return "======== DADOS SEGURADORA ========\n" + "Nome: " + this.getNome() + "\nEmail: " + this.getEmail() + "\nEndereço: " + this.getEndereco() + "\nTelefone: " + this.getTelefone() + "\nCNPJ: " + this.getCNPJ() + "\n==================================\n";
     }
 }
