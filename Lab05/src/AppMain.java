@@ -1,9 +1,8 @@
-//import java.util.Date;
+import java.util.Date;
 import java.util.Scanner;
-//import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;
 public class AppMain {
     public static void main(String[] args) {
-        /*
         //Datas
         System.out.println("======== TESTE DE OBJETOS E MÉTODOS ========\n");
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -93,9 +92,7 @@ public class AppMain {
         System.out.println(seguroPF);
         System.out.println(seguroPJ);
         System.out.println(sinistro);
-        */
         //Menu da Seguradora
-        Scanner sc = new Scanner(System.in); //MUDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         System.out.println("========================================================");
         System.out.println("                  MENU INTERATIVO                       ");
         System.out.println("========================================================");
