@@ -179,31 +179,29 @@ public abstract class Seguro {
             String endereco_sinistro = sc.nextLine();
             //Condutor
             Condutor condutor = null;
-            boolean ok = false;
             do {
                 System.out.println("\nO condutor é o titular do seguro? Responda apenas com 'S'(sim) ou 'N' (não).");
                 String yN = sc.nextLine().toLowerCase();
                 if (yN.equals("s")) { 
                     condutor = null;
-                    ok = true;
                     //objeto Sinistro
                     Sinistro s = new Sinistro(data, endereco_sinistro, this, condutor);
                     getListaSinistros().add(s);
+                    return true;
                 }
-                else  if (yN.equals("n")) {
-                    System.out.println("Então vamos buscar informações sobre o condutor.");
+                else if (yN.equals("n")) {
+                    System.out.println("\nEntão vamos buscar informações sobre o condutor.");
                     condutor = Buscar.buscaCondutor(sc, getListaCondutores());
-                    ok = true;
                     //objeto Sinistro
                     Sinistro s = new Sinistro(data, endereco_sinistro, this, condutor);
                     condutor.getListaSinistros().add(s); //adiciona na lista de sinistros do condutor
+                    return true;
                 }
                 else {
                     System.out.println("Responda apenas com 'S' ou 'N'");
                     System.out.println("Tente novamente...");
                 }
-            } while (!ok);
-            return true;
+            } while (true);
         }
         catch (Exception e) { return false; }
     }

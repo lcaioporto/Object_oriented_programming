@@ -1,8 +1,9 @@
-import java.util.Date;
+//import java.util.Date;
 import java.util.Scanner;
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 public class AppMain {
     public static void main(String[] args) {
+        /*
         //Datas
         System.out.println("======== TESTE DE OBJETOS E MÉTODOS ========\n");
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -33,7 +34,7 @@ public class AppMain {
         Frota frota = new Frota("Nome da frota");
         frota.getListaVeiculos().add(veiculo1);
         frota.getListaVeiculos().add(veiculo2);
-        //clientePJ.getListaFrota().add(frota);
+        clientePJ.getListaFrota().add(frota);
         //Seguradora
         Seguradora seguradora = new Seguradora("Nome da seguradora", "(19)927191298", "seguradora@gmail.com", "Rua da seguradora", "59.488.165/0001-05");
         seguradora.getListaClientes().add(clientePJ);
@@ -72,9 +73,10 @@ public class AppMain {
         System.out.println("Valor do seguro PF: " + String.format("%.2f", seguroPF.calcularValor()).replace(",", "."));
         System.out.println("Valor do seguro PJ: " + String.format("%.2f", seguroPJ.calcularValor()).replace(",", "."));
         //Adicionar um veiculo a uma frota do ClientePJ
-        System.out.println("\n===== ATUALIZAR UMA FROTA =====\n");
+        System.out.println("\n===== ATUALIZAR UMA FROTA (adicionar um veículo) =====\n");
         clientePJ.atualizarFrota(sc, ClientePJ.ADICIONAR_VEICULOS_FROTA);
         //Listar todos os veículos de uma frota
+        System.out.println("\n===== LISTAR TODOS OS VEÍCULOS DE UMA FROTA =====\n");
         clientePJ.getVeiculosPorFrota(sc);
         //Pode-se cancelar um seguro utilizando o método abaixo
         System.out.println("\n===== CANCELAR UM SEGURO =====\n");
@@ -91,9 +93,13 @@ public class AppMain {
         System.out.println(seguroPF);
         System.out.println(seguroPJ);
         System.out.println(sinistro);
-        sc.close();
+        */
         //Menu da Seguradora
+        Scanner sc = new Scanner(System.in); //MUDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         System.out.println("========================================================");
-        MenuSeguradora.MenuInterativo();
+        System.out.println("                  MENU INTERATIVO                       ");
+        System.out.println("========================================================");
+        MenuSeguradora.MenuInterativo(sc);
+        sc.close();
     }
 }

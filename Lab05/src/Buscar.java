@@ -17,7 +17,7 @@ public class Buscar {
             System.out.println("==================================================================");
             System.out.println("O veículo buscado não existe.");
             System.out.println("Digite 1 caso queira tentar novamente.");
-            System.out.println("Caso contrário, digite 2.");
+            System.out.println("Caso contrário, digite 2 (ou qualquer outro dígito distinto de 1).");
             System.out.println("==================================================================");
             aux = sc.nextLine();
         } while(aux.equals("1")); 
@@ -56,7 +56,7 @@ public class Buscar {
             System.out.println("==================================================================");
             System.out.println("O cliente buscado não existe.");
             System.out.println("Digite 1 caso queira tentar novamente.");
-            System.out.println("Caso contrário, digite 2.");
+            System.out.println("Caso contrário, digite 2 (ou qualquer outro dígito distinto de 1).");
             System.out.println("==================================================================");
             aux = sc.nextLine();
         } while (aux.equals("1"));
@@ -70,7 +70,7 @@ public class Buscar {
             System.out.println("\nInsira o CPF do condutor: ");
             String cpf = sc.nextLine().replaceAll("[^0-9]", "");
             for (Condutor currCondutor : listaCondutores) {
-                if (currCondutor.getCPF().equals(cpf.replaceAll("[^0-9]", ""))) {
+                if ((currCondutor.getCPF().replaceAll("[^0-9]", "")).equals(cpf)) {
                     return currCondutor;
                 }
             }
@@ -108,7 +108,7 @@ public class Buscar {
         String aux = "1";
         do {
             System.out.println("\nInsira o ID do seguro: ");
-            int id = Integer.parseInt(sc.nextLine().replaceAll("[^0-9]", ""));
+            int id = Integer.parseInt(sc.nextLine());
             for (Seguro seguro : listaSeguros) {
                 if (seguro.getID() == id) {
                     return seguro;
@@ -131,6 +131,9 @@ public class Buscar {
             String codigo = sc.nextLine();
             for (Frota f : listaFrota) {
                 if (f.getCode().equals(codigo)) {
+                    System.out.println("===================");
+                    System.out.println("Frota encontrada!");
+                    System.out.println("===================");
                     return f;
                 }
             }

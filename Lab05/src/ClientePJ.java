@@ -39,7 +39,7 @@ public class ClientePJ extends Cliente {
     //Métodos
     private void adicionarVeiculosFrota (Scanner sc, Frota frota) {
         String input = "";
-        System.out.println("Entre com os veículos da Frota.");
+        System.out.println("Cadastre o novo veículo inserindo as informações abaixo.");
         do {
             boolean check = frota.addVeiculo(sc);
             if (check) {
@@ -52,10 +52,12 @@ public class ClientePJ extends Cliente {
                 System.out.println("Ocorreu um erro ao cadastrar o veículo.");
                 System.out.println("=======================================");
             }
+            System.out.println("=========================================================");
             System.out.println("Se deseja prosseguir inserindo um novo veículo, digite 1.");
             System.out.println("Caso contrário, digite 2.");
+            System.out.println("=========================================================");
             input = sc.nextLine();
-        } while (!input.equals("2"));
+        } while (input.equals("1"));
     }
 
     private void removerVeiculosFrota (Scanner sc, Frota frota) {
@@ -98,7 +100,7 @@ public class ClientePJ extends Cliente {
     public boolean atualizarFrota(Scanner sc, int tipo) {
         System.out.println("Com qual frota deseja-se lidar?");
         Frota f = Buscar.buscarFrota(sc, listaFrota);
-        try {
+        if (f != null) {
             if (tipo == 1) { //adicionar veículos na frota
                 adicionarVeiculosFrota(sc, f);
             } else if (tipo == 2) { //remover veículos da frota
@@ -108,9 +110,8 @@ public class ClientePJ extends Cliente {
                 listaFrota.remove(f);
             }
             return true;
-        } catch (Exception e) {
-            return false;
         }
+        return false;
     }
 
     public boolean getVeiculosPorFrota (Scanner sc) {

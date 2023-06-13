@@ -51,8 +51,7 @@ public class MenuSeguradora {
         System.out.println(s);
     }
 
-    public static void MenuInterativo () {
-        Scanner sc = new Scanner(System.in);
+    public static void MenuInterativo (Scanner sc) {
         int input, input_cliente, input_sinistro, input_veiculo, input_seguro, input_frota;
         //Obs.: Cada variavel de input recebe uma constante somada para se adequar aos valores do MenuOpercoes (enum)
         MenuOperacoes op, op_cliente, op_sinistro, op_veiculo, op_seguro, op_frota;
@@ -453,7 +452,7 @@ public class MenuSeguradora {
                                     print("6) Visualizar um sinistro de um condutor");
                                     print("7) Remover um sinistro de um condutor");
                                     print("8) Listar todos os sinistros de um cliente");
-                                    print("9) Retornar ao menu principal");
+                                    print("9) Retornar ao menu do seguro");
                                     print("==========================");
                                     input_sinistro = Validacao.validainput(sc, 1, 9) + 31;
                                     if (input_sinistro == 40) break;
