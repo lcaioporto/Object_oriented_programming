@@ -1,6 +1,28 @@
+package Administrador;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import Arquivos.ArquivoClientePF;
+import Arquivos.ArquivoClientePJ;
+import Arquivos.ArquivoCondutor;
+import Arquivos.ArquivoFrota;
+import Arquivos.ArquivoSeguro;
+import Arquivos.ArquivoSinistro;
+import Arquivos.ArquivoVeiculo;
+import Clientes.Cliente;
+import Clientes.ClientePF;
+import Clientes.ClientePJ;
+import Registro.Sinistro;
+import Seguros.Condutor;
+import Seguros.Seguro;
+import Seguros.SeguroPF;
+import Seguros.SeguroPJ;
+import Utilidades.Buscar;
+import Utilidades.Validacao;
+import Veiculos.Frota;
+import Veiculos.Veiculo;
+
 import java.util.ArrayList;
 public class Seguradora {
     private String nome;
@@ -10,6 +32,14 @@ public class Seguradora {
     private final String CNPJ;
     private ArrayList<Cliente> listaClientes; //lista de todos os clientes da seguradora
     private ArrayList<Seguro> listaSeguros; //lista com todos os seguros da seguradora;
+    //Arquivos
+    private ArquivoClientePF arquivoClientePF;
+    private ArquivoClientePJ arquivoClientePJ;
+    private ArquivoVeiculo arquivoVeiculo;
+    private ArquivoFrota arquivoFrota;
+    private ArquivoCondutor arquivoCondutor;
+    private ArquivoSeguro arquivoSeguro;
+    private ArquivoSinistro arquivoSinistro;
 
     //Construtor da Seguradora
     public Seguradora (String nome, String telefone, String email, String endereco, String CNPJ) {
@@ -20,6 +50,14 @@ public class Seguradora {
         this.CNPJ = CNPJ;
         listaClientes = new ArrayList<Cliente>();
         listaSeguros = new ArrayList<Seguro>();
+        //Arquivos
+        arquivoClientePF = new ArquivoClientePF();
+        arquivoClientePJ = new ArquivoClientePJ();
+        arquivoVeiculo = new ArquivoVeiculo();
+        arquivoFrota = new ArquivoFrota();
+        arquivoCondutor = new ArquivoCondutor();
+        arquivoSeguro = new ArquivoSeguro();
+        arquivoSinistro = new ArquivoSinistro();
     }
 
     //Getters
@@ -371,6 +409,7 @@ public class Seguradora {
             if (veiculo == null) return false;
             SeguroPF seguro = new SeguroPF(dataInicio, dataFim, seguradora, veiculo, (ClientePF) cliente);
             listaSeguros.add(seguro);
+        
         } else { //SEGURO PJ
             Frota frota = Buscar.buscarFrota(sc, ((ClientePJ) cliente).getListaFrota());
             if (frota == null) return false;
@@ -396,6 +435,53 @@ public class Seguradora {
         if (seguro == null) return false;
         listaSeguros.remove(seguro);
         return true;
+    }
+
+    public void lerDados () {
+        /*
+            Chama os métodos 'lerAquivo()' de cada classe de arquivos;
+            Relaciona os objetos instanciados;
+            São printadas apenas as informações dos objetos efetivamente cadastrados!
+            Aqueles objetos com "erros": CPF ou CNPJ inválido, não são printados e nem cadastrados.
+        */
+        ArrayList<Object> listaVeiculos = arquivoVeiculo.lerArquivo(null); //OK
+        ArrayList<Object> listaCondutores = arquivoCondutor.lerArquivo(null);
+        ArrayList<Object> listaClientePF = arquivoClientePF.lerArquivo(listaVeiculos);
+        ArrayList<Object> listaFrotas = arquivoFrota.lerArquivo(listaVeiculos); //OK
+        ArrayList<Object> listaClientePJ = arquivoClientePJ.lerArquivo(listaFrotas);
+        //Adicionar os clientes PF na lista de clientes da seguradora
+        for (Object clientePF : listaClientePF) {
+            this.listaClientes.add((Cliente) clientePF);
+        }
+        //Adicionar os clientes PJ na lista de clientes da seguradora
+        for (Object clientePJ : listaClientePJ) {
+            this.listaClientes.add((Cliente) clientePJ);
+        }
+        //Criar um seguro fictício só para armazenar a lista de condutores
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Date dataIni = new Date();
+        Date dataFim = new Date();
+        try {
+            dataIni = formatter.parse("20-10-2015");
+            dataFim = formatter.parse("20-10-2018");
+        } catch (ParseException e) {
+            System.out.println("==========================================================");
+            System.out.println("Ocorreu um erro inesperado durante a leitura dos arquivos!");
+            System.out.println("==========================================================");
+        }
+        SeguroPF testSeguro = new SeguroPF(dataIni, dataFim, this, ((Veiculo)((ClientePF) listaClientePF.get(0)).getListaVeiculos().get(0)), (ClientePF) listaClientePF.get(0));
+        for (Object condutor : listaCondutores) {
+            testSeguro.getListaCondutores().add((Condutor) condutor);
+        }
+        this.listaSeguros.add(testSeguro);
+    }
+
+    public boolean gravarDados() {
+        //método chamado no final do programa para registrar todas as informações
+        if (arquivoSinistro.gravarArquivo(this) && arquivoSeguro.gravarArquivo(this)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
