@@ -1,5 +1,5 @@
-# MC322 - Programação Orietada a Objetos
+# Object Oriented Programming project
 <p>
-    Estudo de Programação Orietada a Objetos através da linguagem Java. 
-    Desenvolvimento de software de uma Seguradora como projeto para aprendizado da disciplina.
+    Study of Object Oriented Programming using the Java language during an course at IC-UNICAMP.
+    Software development for an Insurance Company.
 </p>
